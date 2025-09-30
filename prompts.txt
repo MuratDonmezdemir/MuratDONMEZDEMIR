@@ -1,0 +1,30 @@
+Kişisel bir web sitesi oluşturmak için aşağıdaki bilgileri kullanarak bir web sitesi taslağı oluştur.
+
+1. Başlık: Murat Dönmezdemir
+
+2. Hakkımda: 
+ - Teknolojiye olan tutkum ve analitik düşünme yeteneğim sayesinde QA test uzmanı, veri analisti ve full-stack geliştirici olarak kariyerimi ileri taşımaya kararlıyım. BTK Akademi, Wise Quarter ve Udemy gibi önde gelen platformlardan aldığım kapsamlı eğitimlerle becerilerimi sürekli geliştirdim. SQL Server, Selenium, Python, Java, TestNG, JavaScript, C#, C++ gibi konularda derin bilgiye sahibim ve bu yeteneklerimi gerçek dünya projelerinde uygulamaya hazırım.
+
+3. Eğitim: 
+ - [BTK Academy - QA Test Specialist - Mezuniyet tarihi]
+ - [Wise Quarter - Data Analyst - Mezuniyet tarihi]
+ - [Udemy - Full Stack Developer - Mezuniyet tarihi]
+
+4. Sertifikalar: 
+ - [Sertifika ismi - Veren kurum - Tarih] - [Sertifika Bağlantısı (PDF formatında)]
+
+5. Yönetim Paneli: 
+ - Yalnızca yönetici olarak giriş yaparak sertifikalarınızı yükleyin. 
+ - Giriş Yap: [Admin Girişi] (Admin paneline yönlendiren bağlantı)
+ - Sertifika Ekle:
+   - Sertifika Adı:
+   - Veren Kurum:
+   - Tarih:
+   - PDF Dosyasını Yükle: [Dosya Seç] [Yükle Butonu]
+   - Yükledikten sonra sertifikanız otomatik olarak ana sayfada görüntülenecektir.   kullanıcı adı : mndrsdnmzdmr    kullanıcı şifresi :Arzumende2014
+bu  fotoğrafı sitenin tüm arka planlarında kullan 
+bu da benim kişisel resmim  bunu da  ana   ilk sayfada sağ üst köşede yada   adımın alt kısmında  kullan 
+Email : testingdnmzdmr@gmail.com     telefon  +90 554 908 3133  Adres  Van , İzmirolarak düzelt 
+bu resimleri sertifikalar kısmına yükle 
+sertifikalar  kısmında görüntüle  dediğimde hiçbir eylem yok gerekli düzenleme ve düzeltmeleri yap sorunsuz çalışsın 
+ backend ve frontend de uyum sorunu varsa  düeltelim 

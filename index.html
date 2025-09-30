@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Murat Dönmezdemir - QA Test Uzmanı & Full-Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        .hero-gradient {
+            background: url('https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-08-17%20171506.png') center/cover no-repeat;
+        }
+        .certificate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .skill-bar {
+            transition: width 1.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-blue-800">Murat Dönmezdemir</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-gray-700 hover:text-blue-600 px-3 py-2">Hakkımda</a>
+                    <a href="#education" class="text-gray-700 hover:text-blue-600 px-3 py-2">Eğitim</a>
+                    <a href="#certificates" class="text-gray-700 hover:text-blue-600 px-3 py-2">Sertifikalar</a>
+                    <a href="admin.html" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+                        <i data-feather="lock" class="inline mr-2"></i>Yönetim Paneli
+                    </a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-blue-600">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white pb-3">
+            <a href="#about" class="block px-4 py-2 text-gray-700 hover:bg-blue-50">Hakkımda</a>
+            <a href="#education" class="block px-4 py-2 text-gray-700 hover:bg-blue-50">Eğitim</a>
+            <a href="#certificates" class="block px-4 py-2 text-gray-700 hover:bg-blue-50">Sertifikalar</a>
+            <a href="admin.html" class="block px-4 py-2 text-blue-600 hover:bg-blue-50">
+                <i data-feather="lock" class="inline mr-2"></i>Yönetim Paneli
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-gradient pt-24 pb-20 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="md:flex items-center justify-between">
+                <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Murat Dönmezdemir</h1>
+                    <h2 class="text-2xl md:text-3xl font-semibold mb-6">QA Test Uzmanı & Full-Stack Developer</h2>
+                    <p class="text-lg mb-8 opacity-90">Teknoloji tutkum ve analitik düşünme yeteneğimle kaliteli yazılım çözümleri sunuyorum.</p>
+                    <div class="flex space-x-4">
+                        <a href="#contact" class="bg-white text-blue-700 px-6 py-3 rounded-md font-medium hover:bg-gray-100 transition duration-300">
+                            İletişim
+                        </a>
+                        <a href="#certificates" class="border border-white text-white px-6 py-3 rounded-md font-medium hover:bg-white hover:text-blue-700 transition duration-300">
+                            Sertifikalarım
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center" data-aos="fade-left">
+                    <div class="relative">
+                        <div class="w-64 h-64 md:w-80 md:h-80 bg-blue-200 rounded-full overflow-hidden shadow-xl">
+                            <img src="https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/menderesAbi.jpeg" alt="Murat Dönmezdemir" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute -bottom-5 -right-5 bg-white p-4 rounded-lg shadow-lg">
+                            <div class="text-blue-800 font-bold text-xl">5+</div>
+                            <div class="text-gray-600 text-sm">Yıllık Deneyim</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Hakkımda</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+            </div>
+            <div class="md:flex items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
+                    <img src="https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-08-17%20171506.png" alt="Çalışma Alanı" class="rounded-lg shadow-lg w-full">
+                </div>
+                <div class="md:w-1/2 md:pl-12" data-aos="fade-left">
+                    <p class="text-lg text-gray-700 mb-6">
+                        Teknolojiye olan tutkum ve analitik düşünme yeteneğim sayesinde QA test uzmanı, veri analisti ve full-stack geliştirici olarak kariyerimi ileri taşımaya kararlıyım.
+                    </p>
+                    <p class="text-lg text-gray-700 mb-6">
+                        BTK Akademi, Wise Quarter ve Udemy gibi önde gelen platformlardan aldığım kapsamlı eğitimlerle becerilerimi sürekli geliştirdim. SQL Server, Selenium, Python, Java, TestNG, JavaScript, C#, C++ gibi konularda derin bilgiye sahibim ve bu yeteneklerimi gerçek dünya projelerinde uygulamaya hazırım.
+                    </p>
+                    <div class="mt-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Yeteneklerim</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-700">QA Testing</span>
+                                    <span class="text-gray-700">90%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="skill-bar bg-blue-600 h-2.5 rounded-full" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-700">Full-Stack Development</span>
+                                    <span class="text-gray-700">85%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="skill-bar bg-blue-600 h-2.5 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-gray-700">Data Analysis</span>
+                                    <span class="text-gray-700">80%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="skill-bar bg-blue-600 h-2.5 rounded-full" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20" style="background: url('https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-08-17%20171506.png') center/cover no-repeat;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Eğitim</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-blue-600 mb-4">
+                        <i data-feather="award" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">QA Test Specialist</h3>
+                    <p class="text-gray-600 mb-2">BTK Academy</p>
+                    <p class="text-gray-500">Mezuniyet Tarihi: [Tarih]</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-blue-600 mb-4">
+                        <i data-feather="bar-chart-2" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Data Analyst</h3>
+                    <p class="text-gray-600 mb-2">Wise Quarter</p>
+                    <p class="text-gray-500">Mezuniyet Tarihi: [Tarih]</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-blue-600 mb-4">
+                        <i data-feather="code" class="w-10 h-10"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Full Stack Developer</h3>
+                    <p class="text-gray-600 mb-2">Udemy</p>
+                    <p class="text-gray-500">Mezuniyet Tarihi: [Tarih]</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="py-20" style="background: url('https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-08-17%20171506.png') center/cover no-repeat;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Sertifikalar</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Certificate items -->
+                <div class="bg-white p-6 rounded-lg shadow-md certificate-card transition duration-300" data-aos="fade-up">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-1">Scrum Sertifikası</h3>
+                            <p class="text-gray-600">BTK Academy</p>
+                        </div>
+                        <div class="text-blue-600">
+                            <i data-feather="file-text" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-500 mb-4">Tarih: 2024</p>
+                    <a href="https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/Scrum_Sertifika.jpg" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center">
+                        <i data-feather="download" class="w-4 h-4 mr-2"></i> Görüntüle
+                    </a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md certificate-card transition duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-1">Yapay Zeka Sertifikası</h3>
+                            <p class="text-gray-600">Wise Quarter</p>
+                        </div>
+                        <div class="text-blue-600">
+                            <i data-feather="file-text" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-500 mb-4">Tarih: 2024</p>
+                    <a href="https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/yapay-zeka-sertifika-wisequarter.jpg" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center">
+                        <i data-feather="download" class="w-4 h-4 mr-2"></i> Görüntüle
+                    </a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md certificate-card transition duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-1">Uygulamalarla SQL Öğreniyorum</h3>
+                            <p class="text-gray-600">BTK Academy</p>
+                        </div>
+                        <div class="text-blue-600">
+                            <i data-feather="file-text" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-500 mb-4">Tarih: 2024</p>
+                    <a href="https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/Uygulamalarla_SQL_Öğreniyorum_Sertifika.jpg" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center">
+                        <i data-feather="download" class="w-4 h-4 mr-2"></i> Görüntüle
+                    </a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md certificate-card transition duration-300" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-1">Yazılım Testine Giriş</h3>
+                            <p class="text-gray-600">BTK Academy</p>
+                        </div>
+                        <div class="text-blue-600">
+                            <i data-feather="file-text" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-500 mb-4">Tarih: 2024</p>
+                    <a href="https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/Yazılım_Testine_Giriş_Sertifika.jpg" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center">
+                        <i data-feather="download" class="w-4 h-4 mr-2"></i> Görüntüle
+                    </a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md certificate-card transition duration-300" data-aos="fade-up" data-aos-delay="400">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-1">Sıfırdan İleri Düzey Python</h3>
+                            <p class="text-gray-600">Udemy</p>
+                        </div>
+                        <div class="text-blue-600">
+                            <i data-feather="file-text" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-500 mb-4">Tarih: 2024</p>
+                    <a href="https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/udemy-sıfırdan-ileri-düzey-pyhton.jpg" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center">
+                        <i data-feather="download" class="w-4 h-4 mr-2"></i> Görüntüle
+                    </a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md certificate-card transition duration-300" data-aos="fade-up" data-aos-delay="500">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-1">Yapay Zeka ve Makine Öğrenmesi</h3>
+                            <p class="text-gray-600">Wise Quarter</p>
+                        </div>
+                        <div class="text-blue-600">
+                            <i data-feather="file-text" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-500 mb-4">Tarih: 2024</p>
+                    <a href="https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/yapay-zeka.jpg" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center">
+                        <i data-feather="download" class="w-4 h-4 mr-2"></i> Görüntüle
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20" style="background: url('https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-08-17%20171506.png') center/cover no-repeat;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">İletişim</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+            </div>
+            <div class="md:flex">
+                <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
+                    <div class="bg-gray-50 p-8 rounded-lg shadow-md h-full">
+                        <h3 class="text-xl font-semibold mb-6">Bana Ulaşın</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="text-blue-600 mr-4 mt-1">
+                                    <i data-feather="mail" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">Email</h4>
+                                    <p class="text-gray-600">testingdnmzdmr@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="text-blue-600 mr-4 mt-1">
+                                    <i data-feather="phone" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">Telefon</h4>
+                                    <p class="text-gray-600">+90 554 908 3133</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="text-blue-600 mr-4 mt-1">
+                                    <i data-feather="map-pin" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-800">Adres</h4>
+                                    <p class="text-gray-600">Van, Türkiye</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8">
+                            <h4 class="font-medium text-gray-800 mb-4">Sosyal Medya</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="text-gray-600 hover:text-blue-600">
+                                    <i data-feather="linkedin" class="w-6 h-6"></i>
+                                </a>
+                                <a href="#" class="text-gray-600 hover:text-blue-600">
+                                    <i data-feather="github" class="w-6 h-6"></i>
+                                </a>
+                                <a href="#" class="text-gray-600 hover:text-blue-600">
+                                    <i data-feather="twitter" class="w-6 h-6"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 md:pl-12" data-aos="fade-left">
+                    <div class="bg-gray-50 p-8 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-6">Mesaj Gönder</h3>
+                        <form>
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-700 mb-2">Adınız</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 mb-2">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                            <div class="mb-4">
+                                <label for="message" class="block text-gray-700 mb-2">Mesajınız</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                            </div>
+                            <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700 transition duration-300 w-full">
+                                Gönder
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="md:flex md:justify-between">
+                <div class="mb-8 md:mb-0">
+                    <h3 class="text-xl font-bold mb-4">Murat Dönmezdemir</h3>
+                    <p class="text-gray-400">QA Test Uzmanı & Full-Stack Developer</p>
+                </div>
+                <div class="grid grid-cols-2 gap-8 md:grid-cols-3">
+                    <div>
+                        <h4 class="text-sm font-semibold uppercase tracking-wider mb-4">Bağlantılar</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#about" class="text-gray-400 hover:text-white">Hakkımda</a></li>
+                            <li><a href="#education" class="text-gray-400 hover:text-white">Eğitim</a></li>
+                            <li><a href="#certificates" class="text-gray-400 hover:text-white">Sertifikalar</a></li>
+                            <li><a href="#contact" class="text-gray-400 hover:text-white">İletişim</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold uppercase tracking-wider mb-4">Hizmetler</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white">QA Testing</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white">Web Geliştirme</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white">Veri Analizi</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold uppercase tracking-wider mb-4">Yasal</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white">Gizlilik Politikası</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white">Kullanım Şartları</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center">
+                <p class="text-gray-400">&copy; 2023 Murat Dönmezdemir. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Initialize animations
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Initialize feather icons
+        feather.replace();
+
+        // Animate skill bars on scroll
+        window.addEventListener('scroll', function() {
+            const skillBars = document.querySelectorAll('.skill-bar');
+            skillBars.forEach(bar => {
+                const rect = bar.getBoundingClientRect();
+                if (rect.top < window.innerHeight) {
+                    bar.style.width = bar.parentElement.getAttribute('data-width');
+                }
+            });
+        });
+
+        // Trigger skill bar animation on page load if already in view
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillBars = document.querySelectorAll('.skill-bar');
+            skillBars.forEach(bar => {
+                const rect = bar.getBoundingClientRect();
+                if (rect.top < window.innerHeight) {
+                    bar.style.width = bar.parentElement.getAttribute('data-width');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
