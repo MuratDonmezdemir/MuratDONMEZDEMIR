@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Blog Yazısı - Murat Dönmezdemir</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <style>
+        body {
+            background: url('https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-08-17%20171506.png') center/cover no-repeat fixed;
+        }
+        .content-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        /* İçerikten gelen stiller için temel ayarlar */
+        .post-content h1, .post-content h2, .post-content h3 { font-weight: bold; margin-top: 1.5rem; margin-bottom: 1rem; }
+        .post-content h1 { font-size: 1.875rem; }
+        .post-content h2 { font-size: 1.5rem; }
+        .post-content h3 { font-size: 1.25rem; }
+        .post-content p { margin-bottom: 1rem; line-height: 1.75; }
+        .post-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1rem; }
+        .post-content ol { list-style-type: decimal; margin-left: 1.5rem; margin-bottom: 1rem; }
+        .post-content strong, .post-content b { font-weight: bold; }
+        .post-content a { color: #2563eb; text-decoration: underline; }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-xl font-bold text-blue-800">Murat Dönmezdemir</a>
+                </div>
+                <div class="flex items-center">
+                    <a href="index.html#blog" class="text-gray-700 hover:text-blue-600 px-4 py-2 rounded-md transition duration-300 flex items-center">
+                        <i data-feather="arrow-left" class="w-4 h-4 mr-2"></i> Tüm Yazılara Geri Dön
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Blog Post Content -->
+    <main class="min-h-screen flex items-center justify-center px-4 py-24">
+        <div id="post-container" class="content-card rounded-xl p-8 max-w-4xl w-full shadow-xl text-gray-900">
+            <!-- İçerik buraya dinamik olarak yüklenecek -->
+            <p class="text-center text-gray-600">Yazı yükleniyor...</p>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('post-container');
+            const params = new URLSearchParams(window.location.search);
+            const postId = params.get('id');
+
+            if (!postId) {
+                container.innerHTML = '<h1 class="text-2xl font-bold text-red-600">Hata: Gösterilecek yazı bulunamadı.</h1>';
+                return;
+            }
+
+            const allPosts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
+            const post = allPosts.find(p => p.id === postId);
+
+            if (!post) {
+                container.innerHTML = `<h1 class="text-2xl font-bold text-red-600">Hata: '${postId}' kimliğine sahip yazı bulunamadı.</h1>`;
+                return;
+            }
+
+            document.title = `${post.title} - Murat Dönmezdemir`;
+            container.innerHTML = `
+                <h1 class="text-4xl font-bold mb-2">${post.title}</h1>
+                <p class="text-gray-500 mb-6">Yayınlanma Tarihi: ${new Date(post.createdAt).toLocaleDateString('tr-TR')}</p>
+                ${post.imageUrl ? `<img src="${post.imageUrl}" alt="${post.title}" class="rounded-lg mb-6 w-full max-h-96 object-cover">` : ''}
+                <div class="post-content text-lg">${post.content || post.excerpt}</div>
+            `;
+        });
+        feather.replace();
+    </script>
+</body>
+</html>

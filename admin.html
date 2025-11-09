@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Yönetim Paneli - Murat Dönmezdemir</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
     <style>
         .login-form {
             max-width: 400px;
-            margin: 0 auto;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
         .admin-nav {
             background: url('https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-08-17%20171506.png') center/cover no-repeat;
@@ -19,42 +16,40 @@
     </style>
 </head>
 <body class="bg-gray-100 font-sans antialiased">
+
     <!-- Login Screen (shown by default) -->
     <div id="login-screen" class="min-h-screen flex items-center justify-center p-4" style="background: url('https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-08-17%20171506.png') center/cover no-repeat;">
-        <div class="bg-white/90 p-8 rounded-lg login-form backdrop-blur-sm">
+        <div class="bg-white/95 p-8 rounded-lg shadow-xl login-form backdrop-blur-sm">
             <div class="text-center mb-8">
                 <h1 class="text-2xl font-bold text-gray-800">Yönetim Paneli Girişi</h1>
                 <p class="text-gray-600 mt-2">Lütfen kimlik bilgilerinizi girin</p>
             </div>
             <form id="login-form">
                 <div class="mb-4">
-                    <label for="username" class="block text-gray-700 mb-2">Kullanıcı Adı</label>
+                    <label for="username" class="block text-gray-700 mb-2 font-medium">Kullanıcı Adı</label>
                     <input type="text" id="username" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="mb-6">
-                    <label for="password" class="block text-gray-700 mb-2">Şifre</label>
+                    <label for="password" class="block text-gray-700 mb-2 font-medium">Şifre</label>
                     <input type="password" id="password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 flex items-center justify-center">
                     <i data-feather="log-in" class="w-4 h-4 mr-2"></i> Giriş Yap
                 </button>
                 <div id="login-error" class="mt-4 text-red-600 text-sm hidden">
-                    <i data-feather="alert-circle" class="w-4 h-4 inline mr-1"></i>
-                    <span>Hatalı kullanıcı adı veya şifre!</span>
+                    <i data-feather="alert-circle" class="w-4 h-4 inline mr-1"></i> Hatalı kullanıcı adı veya şifre!
                 </div>
             </form>
         </div>
     </div>
 
     <!-- Admin Panel (hidden by default) -->
-    <div id="admin-panel" class="hidden min-h-screen">
+    <div id="admin-panel" class="hidden">
         <!-- Admin Navigation -->
         <nav class="admin-nav text-white shadow-md">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16 items-center">
-                    <div class="flex items-center">
-                        <span class="text-xl font-bold">Yönetim Paneli</span>
-                    </div>
+                    <span class="text-xl font-bold">Yönetim Paneli</span>
                     <div class="flex items-center space-x-4">
                         <span class="text-sm">Hoşgeldiniz, Murat</span>
                         <button id="logout-btn" class="text-white hover:text-gray-200 flex items-center">
@@ -65,143 +60,469 @@
             </div>
         </nav>
 
-        <!-- Admin Content -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" style="background: url('https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-08-17%20171506.png') center/cover no-repeat;">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <div class="p-6 border-b border-gray-200">
-                    <h2 class="text-xl font-semibold text-gray-800">Sertifika Ekle</h2>
-                </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+            <!-- Sertifika Yönetimi -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+                <div class="p-6 border-b"><h2 class="text-xl font-semibold text-gray-800">Sertifika Yönetimi</h2></div>
                 <div class="p-6">
-                    <form id="certificate-form">
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div>
-                                <label for="certificate-name" class="block text-gray-700 mb-2">Sertifika Adı</label>
-                                <input type="text" id="certificate-name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                            </div>
-                            <div>
-                                <label for="issuing-org" class="block text-gray-700 mb-2">Veren Kurum</label>
-                                <input type="text" id="issuing-org" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                            </div>
-                            <div>
-                                <label for="issue-date" class="block text-gray-700 mb-2">Tarih</label>
-                                <input type="date" id="issue-date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                            </div>
-                            <div>
-                                <label for="pdf-file" class="block text-gray-700 mb-2">PDF Dosyası</label>
-                                <div class="flex items-center">
-                                    <input type="file" id="pdf-file" accept=".pdf" class="hidden" required>
-                                    <label for="pdf-file" class="px-4 py-2 bg-gray-100 border border-gray-300 rounded-l-md cursor-pointer hover:bg-gray-200">
-                                        <i data-feather="upload" class="w-4 h-4 inline mr-2"></i>Dosya Seç
-                                    </label>
-                                    <span id="file-name" class="px-4 py-2 bg-gray-50 border border-l-0 border-gray-300 rounded-r-md text-gray-500 truncate max-w-xs">Dosya seçilmedi</span>
-                                </div>
-                            </div>
+                    <form id="certificate-form" class="space-y-4">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <input type="text" id="certificate-name" placeholder="Sertifika Adı" class="w-full px-4 py-2 border rounded-md" required>
+                            <input type="text" id="issuing-org" placeholder="Veren Kurum" class="w-full px-4 py-2 border rounded-md" required>
+                            <input type="date" id="issue-date" class="w-full px-4 py-2 border rounded-md" required>
+                            <input type="file" id="pdf-file" accept=".pdf,.jpg,.jpeg,.png" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" required>
                         </div>
-                        <div class="mt-6">
-                            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition duration-300 flex items-center">
-                                <i data-feather="save" class="w-4 h-4 mr-2"></i> Sertifikayı Kaydet
-                            </button>
-                        </div>
-                        <div id="upload-success" class="mt-4 text-green-600 text-sm hidden">
-                            <i data-feather="check-circle" class="w-4 h-4 inline mr-1"></i>
-                            <span>Sertifika başarıyla eklendi!</span>
-                        </div>
-                        <div id="upload-error" class="mt-4 text-red-600 text-sm hidden">
-                            <i data-feather="alert-circle" class="w-4 h-4 inline mr-1"></i>
-                            <span>Bir hata oluştu, lütfen tekrar deneyin.</span>
-                        </div>
+                        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700">Sertifika Ekle</button>
                     </form>
                 </div>
+                <div id="certificate-list" class="divide-y divide-gray-200"></div>
             </div>
 
-            <!-- Existing Certificates -->
-            <div class="mt-8 bg-white rounded-lg shadow-md overflow-hidden">
-                <div class="p-6 border-b border-gray-200">
-                    <h2 class="text-xl font-semibold text-gray-800">Mevcut Sertifikalar</h2>
+            <!-- Blog Yönetimi -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+                <div class="p-6 border-b"><h2 class="text-xl font-semibold text-gray-800">Blog Yönetimi</h2></div>
+                <div class="p-6">
+                    <form id="blog-form" class="space-y-4">
+                        <input type="hidden" id="blog-id">
+                        <input type="text" id="blog-title" placeholder="Blog Başlığı" class="w-full px-4 py-2 border rounded-md" required>
+                        <textarea id="blog-excerpt" placeholder="Özet" rows="2" class="w-full px-4 py-2 border rounded-md" required></textarea>
+                        <textarea id="blog-content" placeholder="Tam İçerik (HTML destekler)" rows="6" class="w-full px-4 py-2 border rounded-md"></textarea>
+                        <input type="text" id="blog-image-url" placeholder="Görsel URL" class="w-full px-4 py-2 border rounded-md">
+                        <input type="text" id="blog-tags" placeholder="Etiketler (virgülle ayırın)" class="w-full px-4 py-2 border rounded-md">
+                        <button type="submit" id="blog-submit-btn" class="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700">Yazıyı Kaydet</button>
+                    </form>
                 </div>
-                <div class="divide-y divide-gray-200">
-                    <!-- Certificate items will be dynamically loaded here -->
-                    <div class="p-6 flex justify-between items-center">
-                        <div>
-                            <h3 class="font-medium text-gray-800">[Sertifika İsmi]</h3>
-                            <p class="text-sm text-gray-600">[Veren Kurum] - [Tarih]</p>
-                        </div>
-                        <div class="flex space-x-2">
-                            <button class="text-blue-600 hover:text-blue-800 p-2">
-                                <i data-feather="download" class="w-4 h-4"></i>
-                            </button>
-                            <button class="text-red-600 hover:text-red-800 p-2">
-                                <i data-feather="trash-2" class="w-4 h-4"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <!-- More certificate items can be added here -->
+                <div id="blog-list" class="divide-y divide-gray-200"></div>
+            </div>
+
+            <!-- Proje Yönetimi -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+                <div class="p-6 border-b"><h2 class="text-xl font-semibold text-gray-800">Proje Yönetimi</h2></div>
+                <div class="p-6">
+                    <form id="project-form" class="space-y-4">
+                        <input type="text" id="project-title" placeholder="Proje Başlığı" class="w-full px-4 py-2 border rounded-md" required>
+                        <textarea id="project-description" placeholder="Açıklama" rows="2" class="w-full px-4 py-2 border rounded-md" required></textarea>
+                        <input type="text" id="project-tags" placeholder="Teknolojiler (virgülle ayırın)" class="w-full px-4 py-2 border rounded-md">
+                        <input type="text" id="project-link" placeholder="Proje Linki" class="w-full px-4 py-2 border rounded-md">
+                        <button type="submit" class="bg-purple-600 text-white px-6 py-2 rounded-md hover:bg-purple-700">Proje Ekle</button>
+                    </form>
                 </div>
+                <div id="project-list" class="divide-y divide-gray-200"></div>
+            </div>
+
+            <!-- Eğitim Yönetimi -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+                <div class="p-6 border-b"><h2 class="text-xl font-semibold text-gray-800">Eğitim Yönetimi</h2></div>
+                <div class="p-6">
+                    <form id="education-form" class="space-y-4">
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <input type="text" id="education-title" placeholder="Eğitim Başlığı" class="w-full px-4 py-2 border rounded-md" required>
+                            <input type="text" id="education-institution" placeholder="Kurum" class="w-full px-4 py-2 border rounded-md" required>
+                            <input type="text" id="education-date" placeholder="Mezuniyet Yılı" class="w-full px-4 py-2 border rounded-md" required>
+                        </div>
+                        <button type="submit" class="bg-yellow-600 text-white px-6 py-2 rounded-md hover:bg-yellow-700">Eğitim Ekle</button>
+                    </form>
+                </div>
+                <div id="education-list" class="divide-y divide-gray-200"></div>
+            </div>
+
+            <!-- Gelen Mesajlar -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-6 border-b"><h2 class="text-xl font-semibold text-gray-800">Gelen Mesajlar</h2></div>
+                <div id="message-list" class="divide-y divide-gray-200"></div>
             </div>
         </div>
     </div>
 
     <script>
-        // Initialize feather icons
-        feather.replace();
+        // =================================================================================
+        // DATA MANAGEMENT (localStorage)
+        // =================================================================================
+        const LocalData = {
+            getBlogPosts: () => JSON.parse(localStorage.getItem('blogPosts') || '[]'),
+            addBlogPost: (p) => { const d = LocalData.getBlogPosts(); d.unshift(p); localStorage.setItem('blogPosts', JSON.stringify(d)); },
+            deleteBlogPost: (id) => { let d = LocalData.getBlogPosts(); localStorage.setItem('blogPosts', JSON.stringify(d.filter(p => p.id !== id))); },
+            updateBlogPost: (id, updatedPost) => {
+                let d = LocalData.getBlogPosts();
+                localStorage.setItem('blogPosts', JSON.stringify(d.map(p => (p.id === id ? updatedPost : p))));
+            },
+            getEducations: () => JSON.parse(localStorage.getItem('educations') || '[]'),
+            addEducation: (e) => { const d = LocalData.getEducations(); d.unshift(e); localStorage.setItem('educations', JSON.stringify(d)); },
+            deleteEducation: (id) => { let d = LocalData.getEducations(); localStorage.setItem('educations', JSON.stringify(d.filter(e => e.id !== id))); },
+            getProjects: () => JSON.parse(localStorage.getItem('projects') || '[]'),
+            addProject: (p) => { const d = LocalData.getProjects(); d.unshift(p); localStorage.setItem('projects', JSON.stringify(d)); },
+            deleteProject: (id) => { let d = LocalData.getProjects(); localStorage.setItem('projects', JSON.stringify(d.filter(p => p.id !== id))); },
+            getContacts: () => JSON.parse(localStorage.getItem('contacts') || '[]'),
+            deleteContact: (id) => { let d = LocalData.getContacts(); localStorage.setItem('contacts', JSON.stringify(d.filter(c => c.id !== id))); },
+            getCertificates: () => JSON.parse(localStorage.getItem('certificates') || '[]'),
+            addCertificate: (c) => { const d = LocalData.getCertificates(); d.unshift(c); localStorage.setItem('certificates', JSON.stringify(d)); },
+            deleteCertificate: (id) => { let d = LocalData.getCertificates(); localStorage.setItem('certificates', JSON.stringify(d.filter(c => c.id !== id))); },
+            fileToBase64: (file) => new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            })
+        };
 
-        // Handle file input display
-        document.getElementById('pdf-file').addEventListener('change', function(e) {
-            const fileName = e.target.files[0] ? e.target.files[0].name : 'Dosya seçilmedi';
-            document.getElementById('file-name').textContent = fileName;
-        });
+        // =================================================================================
+        // RENDER FUNCTIONS (UI)
+        // =================================================================================
+        function renderBlogPosts() {
+            const posts = LocalData.getBlogPosts();
+            const listElement = document.getElementById('blog-list');
+            listElement.innerHTML = posts.length === 0 ? '<p class="p-4 text-center text-gray-500">Henüz blog yazısı yok.</p>' :
+                posts.map(post => `
+                    <div class="p-4 flex justify-between items-center">
+                        <div>
+                            <p class="font-medium">${post.title}</p>
+                            <p class="text-sm text-gray-500">${new Date(post.createdAt).toLocaleDateString('tr-TR')}</p>
+                        </div>
+                        <div>
+                            <button onclick="editBlogPost('${post.id}')" class="p-2 text-blue-600 hover:text-blue-800"><i data-feather="edit"></i></button>
+                            <button onclick="deleteBlogPost('${post.id}')" class="p-2 text-red-600 hover:text-red-800"><i data-feather="trash-2"></i></button>
+                        </div>
+                    </div>
+                `).join('');
+        }
 
-        // Handle login form submission
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const errorElement = document.getElementById('login-error');
-            
-            // Check credentials (hardcoded for demo)
-            if (username === 'mndrsdnmzdmr' && password === 'Arzumende2014') {
-                // Successful login
-                document.getElementById('login-screen').classList.add('hidden');
-                document.getElementById('admin-panel').classList.remove('hidden');
-            } else {
-                // Failed login
-                errorElement.classList.remove('hidden');
-                setTimeout(() => {
-                    errorElement.classList.add('hidden');
-                }, 3000);
+        function editBlogPost(id) {
+            const posts = LocalData.getBlogPosts();
+            const postToEdit = posts.find(p => p.id === id);
+            if (!postToEdit) return;
+
+            // Populate form
+            document.getElementById('blog-id').value = postToEdit.id;
+            document.getElementById('blog-title').value = postToEdit.title;
+            document.getElementById('blog-excerpt').value = postToEdit.excerpt;
+            document.getElementById('blog-image-url').value = postToEdit.imageUrl;
+            document.getElementById('blog-content').value = postToEdit.content || ''; // Set content for textarea
+            document.getElementById('blog-tags').value = postToEdit.tags.join(', ');
+
+            // Update UI for editing
+            document.querySelector('#blog-form h2, #admin-panel h2').textContent = 'Blog Yazısını Düzenle';
+            document.getElementById('blog-submit-btn').innerHTML = '<i data-feather="save" class="w-4 h-4 mr-2"></i> Değişiklikleri Kaydet';
+            feather.replace();
+
+            // Scroll to form
+            document.getElementById('blog-form').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // --- Login and Page Load ---
+        function onAdminPanelLoad() {
+            // This function runs when the admin panel becomes visible
+            console.log('onAdminPanelLoad fonksiyonu çağrıldı. Dinamik veriler yükleniyor...');
+            renderBlogPosts();
+            renderCertificates();
+            renderProjects();
+            renderEducations();
+            renderMessages();
+            console.log('Tüm render fonksiyonları çağrıldı.');
+
+            // Tüm dinamik içerik yüklendikten sonra ikonları bir kez yenile
+            feather.replace();
+        }
+
+        // --- Education Management ---
+        function renderEducations() {
+            const educations = LocalData.getEducations();
+            console.log('renderEducations çağrıldı. Yüklü eğitimler:', educations);
+            const listElement = document.getElementById('education-list');
+            listElement.innerHTML = '';
+
+            if (educations.length === 0) {
+                listElement.innerHTML = '<div class="p-6 text-center text-gray-500">Henüz eğitim eklenmemiş.</div>';
+                return;
             }
+
+            educations.forEach(edu => {
+                const eduElement = document.createElement('div');
+                eduElement.className = 'p-6 flex justify-between items-center';
+                eduElement.innerHTML = `
+                    <div>
+                        <h3 class="font-medium text-gray-800">${edu.title}</h3>
+                        <p class="text-sm text-gray-600">${edu.institution} - ${edu.date}</p>
+                    </div>
+                    <button onclick="deleteEducation('${edu.id}')" class="text-red-600 hover:text-red-800 p-2" title="Sil">
+                        <i data-feather="trash-2" class="w-4 h-4"></i>
+                    </button>
+                `;
+                listElement.appendChild(eduElement);
+            });
+        }
+
+        function deleteEducation(id) {
+            if (confirm('Bu eğitim bilgisini silmek istediğinizden emin misiniz?')) {
+                LocalData.deleteEducation(id);
+                renderEducations();
+            }
+        }
+
+        // --- Project Management ---
+        function renderProjects() {
+            const projects = LocalData.getProjects();
+            console.log('renderProjects çağrıldı. Yüklü projeler:', projects);
+            const listElement = document.getElementById('project-list');
+            listElement.innerHTML = '';
+
+            if (projects.length === 0) {
+                listElement.innerHTML = '<div class="p-6 text-center text-gray-500">Henüz proje eklenmemiş.</div>';
+                return;
+            }
+
+            projects.forEach(project => {
+                const projectElement = document.createElement('div');
+                projectElement.className = 'p-6 flex justify-between items-center';
+                projectElement.innerHTML = `
+                    <div>
+                        <h3 class="font-medium text-gray-800">${project.title}</h3>
+                        <p class="text-sm text-gray-600">${project.tags.join(', ')}</p>
+                    </div>
+                    <button onclick="deleteProject('${project.id}')" class="text-red-600 hover:text-red-800 p-2" title="Sil">
+                        <i data-feather="trash-2" class="w-4 h-4"></i>
+                    </button>
+                `;
+                listElement.appendChild(projectElement);
+            });
+        }
+
+        function deleteProject(id) {
+            if (confirm('Bu projeyi silmek istediğinizden emin misiniz?')) {
+                LocalData.deleteProject(id);
+                renderProjects();
+            }
+        }
+
+        // --- Message Management ---
+        function renderMessages() {
+            const messages = LocalData.getContacts();
+            console.log('renderMessages çağrıldı. Yüklü mesajlar:', messages);
+            const listElement = document.getElementById('message-list');
+            listElement.innerHTML = '';
+
+            if (messages.length === 0) {
+                listElement.innerHTML = '<div class="p-6 text-center text-gray-500">Gelen kutunuz boş.</div>';
+                return;
+            }
+
+            messages.forEach(msg => {
+                const msgElement = document.createElement('div');
+                msgElement.className = 'p-6';
+                msgElement.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="font-semibold text-gray-800">${msg.name} <span class="font-normal text-gray-600">&lt;${msg.email}&gt;</span></p>
+                            <p class="text-sm text-gray-500">${new Date(msg.createdAt).toLocaleString('tr-TR')}</p>
+                        </div>
+                        <button onclick="deleteMessage('${msg.id}')" class="text-red-600 hover:text-red-800 p-2" title="Sil">
+                            <i data-feather="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                    <p class="mt-4 text-gray-700 bg-gray-50 p-3 rounded-md">${msg.message}</p>
+                `;
+                listElement.appendChild(msgElement);
+            });
+        }
+
+        function deleteMessage(id) {
+            if (confirm('Bu mesajı silmek istediğinizden emin misiniz?')) {
+                LocalData.deleteContact(id);
+                renderMessages();
+            }
+        }
+
+        // --- Certificate Management ---
+        function renderCertificates() {
+            const certs = LocalData.getCertificates();
+            console.log('renderCertificates çağrıldı. Yüklü sertifikalar:', certs);
+            const listElement = document.getElementById('certificate-list');
+            listElement.innerHTML = '';
+
+            if (certs.length === 0) {
+                listElement.innerHTML = '<div class="p-6 text-center text-gray-500">Henüz sertifika eklenmemiş.</div>';
+                return;
+            }
+
+            certs.forEach(cert => {
+                const certElement = document.createElement('div');
+                certElement.className = 'p-6 flex justify-between items-center';
+                certElement.innerHTML = `
+                    <div>
+                        <h3 class="font-medium text-gray-800">${cert.name}</h3>
+                        <p class="text-sm text-gray-600">${cert.organization} - ${new Date(cert.date).toLocaleDateString('tr-TR')}</p>
+                    </div>
+                    <div class="flex space-x-2">
+                        <a href="${cert.fileUrl}" target="_blank" class="text-blue-600 hover:text-blue-800 p-2" title="Görüntüle">
+                            <i data-feather="external-link" class="w-4 h-4"></i>
+                        </a>
+                        <button onclick="deleteCertificate('${cert.id}')" class="text-red-600 hover:text-red-800 p-2" title="Sil">
+                            <i data-feather="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                `;
+                listElement.appendChild(certElement);
+            });
+        }
+
+        function deleteCertificate(id) {
+            if (confirm('Bu sertifikayı silmek istediğinizden emin misiniz?')) {
+                LocalData.deleteCertificate(id);
+                renderCertificates();
+            }
+        }
+
+        // --- Main Application Logic ---
+        // Sayfa yüklendiğinde tüm olay dinleyicilerini ve başlangıç fonksiyonlarını kurar.
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                // İlk ikon yüklemesini yap
+                feather.replace();
+                console.log("Sayfa yüklendi ve tüm olay dinleyicileri kuruluyor...");
+
+                // Handle file input display
+                document.getElementById('pdf-file').addEventListener('change', function(e) {
+                    const fileName = e.target.files[0] ? e.target.files[0].name : 'Dosya seçilmedi';
+                    document.getElementById('file-name').textContent = fileName;
+                });
+
+                // Handle login form submission
+                document.getElementById('login-form').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    console.log("Giriş formu gönderildi.");
+
+                    const username = document.getElementById('username').value;
+                    const password = document.getElementById('password').value;
+                    const errorElement = document.getElementById('login-error');
+                    // Kullanıcı adı büyük/küçük harf duyarlı olarak ayarlandı
+                    const isUsernameCorrect = username.trim() === 'Arzumende';
+                    const isPasswordCorrect = password.trim() === '737660';
+
+                    console.log('Giriş denemesi yapılıyor...');
+                    console.log('Kullanıcı Adı Doğru mu:', isUsernameCorrect);
+                    console.log('Şifre Doğru mu:', isPasswordCorrect);
+
+                    if (isUsernameCorrect && isPasswordCorrect) {
+                        console.log("Giriş başarılı, yönetici paneline yönlendiriliyor...");
+                        document.getElementById('login-screen').classList.add('hidden');
+                        document.getElementById('admin-panel').classList.remove('hidden');
+                        onAdminPanelLoad();
+                    } else {
+                        errorElement.classList.remove('hidden');
+                        console.log("Giriş başarısız.");
+                        setTimeout(() => {
+                            errorElement.classList.add('hidden');
+                        }, 3000);
+                    }
+                });
+
+                // Handle logout
+                document.getElementById('logout-btn').addEventListener('click', function() {
+                    document.getElementById('login-screen').classList.remove('hidden');
+                    document.getElementById('admin-panel').classList.add('hidden');
+                    document.getElementById('login-form').reset();
+                    console.log('Çıkış yapıldı.');
+                });
+
+                // Handle certificate form submission
+                document.getElementById('certificate-form').addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    const successElement = document.getElementById('upload-success');
+                    const errorElement = document.getElementById('upload-error');
+                    const fileInput = document.getElementById('pdf-file');
+
+                    if (fileInput.files.length === 0) {
+                        alert('Lütfen bir sertifika dosyası seçin.');
+                        return;
+                    }
+
+                    try {
+                        const fileBase64 = await LocalData.fileToBase64(fileInput.files[0]);
+                        const newCertificate = {
+                            id: Date.now().toString(),
+                            name: document.getElementById('certificate-name').value,
+                            organization: document.getElementById('issuing-org').value,
+                            date: document.getElementById('issue-date').value,
+                            fileUrl: fileBase64,
+                            createdAt: new Date().toISOString()
+                        };
+                        LocalData.addCertificate(newCertificate);
+                        renderCertificates();
+                        successElement.classList.remove('hidden');
+                        setTimeout(() => successElement.classList.add('hidden'), 3000);
+                        this.reset();
+                        document.getElementById('file-name').textContent = 'Dosya seçilmedi';
+                    } catch (error) {
+                        console.error('Dosya dönüştürme hatası:', error);
+                        errorElement.classList.remove('hidden');
+                        setTimeout(() => errorElement.classList.add('hidden'), 3000);
+                    }
+                });
+
+                // Diğer formların submit olaylarını buraya ekleyebilirsiniz.
+                // Örneğin: blog-form, project-form, education-form
+                // Handle blog form submission
+                document.getElementById('blog-form').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const postId = document.getElementById('blog-id').value;
+                    const postData = {
+                        title: document.getElementById('blog-title').value,
+                        excerpt: document.getElementById('blog-excerpt').value,
+                        content: document.getElementById('blog-content').value,
+                        imageUrl: document.getElementById('blog-image-url').value,
+                        tags: document.getElementById('blog-tags').value.split(',').map(tag => tag.trim()).filter(Boolean),
+                    };
+
+                    if (postId) {
+                        const originalPost = LocalData.getBlogPosts().find(p => p.id === postId);
+                        LocalData.updateBlogPost(postId, { ...originalPost, ...postData });
+                    } else {
+                        LocalData.addBlogPost({ ...postData, id: Date.now().toString(), createdAt: new Date().toISOString() });
+                    }
+                    this.reset();
+                    document.getElementById('blog-id').value = '';
+                    document.getElementById('blog-content').value = '';
+                    renderBlogPosts();
+                });
+
+                // Handle project form submission
+                document.getElementById('project-form').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    LocalData.addProject({
+                        id: Date.now().toString(),
+                        title: document.getElementById('project-title').value,
+                        description: document.getElementById('project-description').value,
+                        tags: document.getElementById('project-tags').value.split(',').map(tag => tag.trim()).filter(Boolean),
+                        link: document.getElementById('project-link').value,
+                        createdAt: new Date().toISOString()
+                    });
+                    this.reset();
+                    renderProjects();
+                });
+
+                // Handle education form submission
+                document.getElementById('education-form').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    LocalData.addEducation({
+                        id: Date.now().toString(),
+                        title: document.getElementById('education-title').value,
+                        institution: document.getElementById('education-institution').value,
+                        date: document.getElementById('education-date').value,
+                        createdAt: new Date().toISOString()
+                    });
+                    this.reset();
+                    renderEducations();
+                });
+
+            } catch (error) {
+                console.error("Ana uygulama kurulumunda bir hata oluştu:", error);
+                alert("Uygulama başlatılırken kritik bir hata oluştu. Lütfen konsolu kontrol edin.");
+            }
+
+            // İlk ikon yüklemesini yap
+            feather.replace();
         });
 
-        // Handle logout
-        document.getElementById('logout-btn').addEventListener('click', function() {
-            document.getElementById('login-screen').classList.remove('hidden');
-            document.getElementById('admin-panel').classList.add('hidden');
-            document.getElementById('login-form').reset();
-        });
-
-        // Handle certificate form submission
-        document.getElementById('certificate-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // In a real application, you would upload the file to a server here
-            // For this demo, we'll just show a success message
-            
-            const successElement = document.getElementById('upload-success');
-            const errorElement = document.getElementById('upload-error');
-            
-            // Simulate successful upload
-            successElement.classList.remove('hidden');
-            errorElement.classList.add('hidden');
-            
-            // Reset form
-            this.reset();
-            document.getElementById('file-name').textContent = 'Dosya seçilmedi';
-            
-            setTimeout(() => {
-                successElement.classList.add('hidden');
-            }, 3000);
-        });
     </script>
 </body>
 </html>
