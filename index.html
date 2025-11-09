@@ -481,6 +481,10 @@
                     tags: ["QA Testing"],
                     createdAt: new Date('2025-01-15').toISOString(),
                 });
+                // **DÜZELTME: Statik yazıyı localStorage'a da kaydet**
+                const updatedPostsForStorage = JSON.parse(localStorage.getItem('blogPosts') || '[]');
+                updatedPostsForStorage.unshift(allPosts[0]); // Yeni eklenen statik yazıyı al
+                localStorage.setItem('blogPosts', JSON.stringify(updatedPostsForStorage));
             }
 
             if (allPosts.length === 0) {
