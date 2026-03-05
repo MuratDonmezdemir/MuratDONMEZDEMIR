@@ -73,6 +73,16 @@
                             <input type="date" id="issue-date" class="w-full px-4 py-2 border rounded-md" required>
                             <input type="file" id="pdf-file" accept=".pdf,.jpg,.jpeg,.png" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" required>
                         </div>
+                        <div class="text-sm text-gray-600"> 
+                            <i data-feather="info" class="w-4 h-4 inline mr-1"></i>
+                            <span id="file-name">Dosya seçilmedi</span>
+                        </div>
+                        <div id="upload-success" class="p-3 bg-green-100 text-green-700 rounded-md hidden">
+                            <i data-feather="check-circle" class="w-4 h-4 inline mr-2"></i>Sertifika başarıyla yüklendi!
+                        </div>
+                        <div id="upload-error" class="p-3 bg-red-100 text-red-700 rounded-md hidden">
+                            <i data-feather="alert-circle" class="w-4 h-4 inline mr-2"></i>Dosya yükleme hatası!
+                        </div>
                         <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700">Sertifika Ekle</button>
                     </form>
                 </div>
@@ -145,7 +155,7 @@
             deleteBlogPost: (id) => { let d = LocalData.getBlogPosts(); localStorage.setItem('blogPosts', JSON.stringify(d.filter(p => p.id !== id))); },
             updateBlogPost: (id, updatedPost) => {
                 let d = LocalData.getBlogPosts();
-                localStorage.setItem('blogPosts', JSON.stringify(d.map(p => (p.id === id ? updatedPost : p))));
+                localStorage.setItem('blogPosts', JSON.stringify(d.map(p => (p.id === id ? updatedPost : p)))));
             },
             getEducations: () => JSON.parse(localStorage.getItem('educations') || '[]'),
             addEducation: (e) => { const d = LocalData.getEducations(); d.unshift(e); localStorage.setItem('educations', JSON.stringify(d)); },
@@ -185,6 +195,14 @@
                         </div>
                     </div>
                 `).join('');
+            feather.replace();
+        }
+
+        function deleteBlogPost(id) {
+            if (confirm('Bu yazıyı silmek istediğinizden emin misiniz?')) {
+                LocalData.deleteBlogPost(id);
+                renderBlogPosts();
+            }
         }
 
         function editBlogPost(id) {
@@ -196,13 +214,12 @@
             document.getElementById('blog-id').value = postToEdit.id;
             document.getElementById('blog-title').value = postToEdit.title;
             document.getElementById('blog-excerpt').value = postToEdit.excerpt;
-            document.getElementById('blog-image-url').value = postToEdit.imageUrl;
-            document.getElementById('blog-content').value = postToEdit.content || ''; // Set content for textarea
+            document.getElementById('blog-image-url').value = postToEdit.imageUrl || '';
+            document.getElementById('blog-content').value = postToEdit.content || '';
             document.getElementById('blog-tags').value = postToEdit.tags.join(', ');
 
             // Update UI for editing
-            document.querySelector('#blog-form h2, #admin-panel h2').textContent = 'Blog Yazısını Düzenle';
-            document.getElementById('blog-submit-btn').innerHTML = '<i data-feather="save" class="w-4 h-4 mr-2"></i> Değişiklikleri Kaydet';
+            document.getElementById('blog-submit-btn').textContent = 'Değişiklikleri Kaydet';
             feather.replace();
 
             // Scroll to form
@@ -211,23 +228,18 @@
 
         // --- Login and Page Load ---
         function onAdminPanelLoad() {
-            // This function runs when the admin panel becomes visible
-            console.log('onAdminPanelLoad fonksiyonu çağrıldı. Dinamik veriler yükleniyor...');
+            console.log('Admin paneli yükleniyor...');
             renderBlogPosts();
             renderCertificates();
             renderProjects();
             renderEducations();
             renderMessages();
-            console.log('Tüm render fonksiyonları çağrıldı.');
-
-            // Tüm dinamik içerik yüklendikten sonra ikonları bir kez yenile
             feather.replace();
         }
 
         // --- Education Management ---
         function renderEducations() {
             const educations = LocalData.getEducations();
-            console.log('renderEducations çağrıldı. Yüklü eğitimler:', educations);
             const listElement = document.getElementById('education-list');
             listElement.innerHTML = '';
 
@@ -250,6 +262,7 @@
                 `;
                 listElement.appendChild(eduElement);
             });
+            feather.replace();
         }
 
         function deleteEducation(id) {
@@ -262,7 +275,6 @@
         // --- Project Management ---
         function renderProjects() {
             const projects = LocalData.getProjects();
-            console.log('renderProjects çağrıldı. Yüklü projeler:', projects);
             const listElement = document.getElementById('project-list');
             listElement.innerHTML = '';
 
@@ -277,7 +289,7 @@
                 projectElement.innerHTML = `
                     <div>
                         <h3 class="font-medium text-gray-800">${project.title}</h3>
-                        <p class="text-sm text-gray-600">${project.tags.join(', ')}</p>
+                        <p class="text-sm text-gray-600">${project.tags.join(', ') || 'Etiket yok'}</p>
                     </div>
                     <button onclick="deleteProject('${project.id}')" class="text-red-600 hover:text-red-800 p-2" title="Sil">
                         <i data-feather="trash-2" class="w-4 h-4"></i>
@@ -285,6 +297,7 @@
                 `;
                 listElement.appendChild(projectElement);
             });
+            feather.replace();
         }
 
         function deleteProject(id) {
@@ -297,7 +310,6 @@
         // --- Message Management ---
         function renderMessages() {
             const messages = LocalData.getContacts();
-            console.log('renderMessages çağrıldı. Yüklü mesajlar:', messages);
             const listElement = document.getElementById('message-list');
             listElement.innerHTML = '';
 
@@ -323,6 +335,7 @@
                 `;
                 listElement.appendChild(msgElement);
             });
+            feather.replace();
         }
 
         function deleteMessage(id) {
@@ -335,7 +348,6 @@
         // --- Certificate Management ---
         function renderCertificates() {
             const certs = LocalData.getCertificates();
-            console.log('renderCertificates çağrıldı. Yüklü sertifikalar:', certs);
             const listElement = document.getElementById('certificate-list');
             listElement.innerHTML = '';
 
@@ -363,6 +375,7 @@
                 `;
                 listElement.appendChild(certElement);
             });
+            feather.replace();
         }
 
         function deleteCertificate(id) {
@@ -373,12 +386,10 @@
         }
 
         // --- Main Application Logic ---
-        // Sayfa yüklendiğinde tüm olay dinleyicilerini ve başlangıç fonksiyonlarını kurar.
         document.addEventListener('DOMContentLoaded', function() {
             try {
-                // İlk ikon yüklemesini yap
                 feather.replace();
-                console.log("Sayfa yüklendi ve tüm olay dinleyicileri kuruluyor...");
+                console.log("Sayfa yüklendi");
 
                 // Handle file input display
                 document.getElementById('pdf-file').addEventListener('change', function(e) {
@@ -389,27 +400,19 @@
                 // Handle login form submission
                 document.getElementById('login-form').addEventListener('submit', function(e) {
                     e.preventDefault();
-                    console.log("Giriş formu gönderildi.");
 
                     const username = document.getElementById('username').value;
                     const password = document.getElementById('password').value;
                     const errorElement = document.getElementById('login-error');
-                    // Kullanıcı adı büyük/küçük harf duyarlı olarak ayarlandı
                     const isUsernameCorrect = username.trim() === 'Arzumende';
                     const isPasswordCorrect = password.trim() === '737660';
 
-                    console.log('Giriş denemesi yapılıyor...');
-                    console.log('Kullanıcı Adı Doğru mu:', isUsernameCorrect);
-                    console.log('Şifre Doğru mu:', isPasswordCorrect);
-
                     if (isUsernameCorrect && isPasswordCorrect) {
-                        console.log("Giriş başarılı, yönetici paneline yönlendiriliyor...");
                         document.getElementById('login-screen').classList.add('hidden');
                         document.getElementById('admin-panel').classList.remove('hidden');
                         onAdminPanelLoad();
                     } else {
                         errorElement.classList.remove('hidden');
-                        console.log("Giriş başarısız.");
                         setTimeout(() => {
                             errorElement.classList.add('hidden');
                         }, 3000);
@@ -421,7 +424,7 @@
                     document.getElementById('login-screen').classList.remove('hidden');
                     document.getElementById('admin-panel').classList.add('hidden');
                     document.getElementById('login-form').reset();
-                    console.log('Çıkış yapıldı.');
+                    document.getElementById('file-name').textContent = 'Dosya seçilmedi';
                 });
 
                 // Handle certificate form submission
@@ -452,6 +455,7 @@
                         setTimeout(() => successElement.classList.add('hidden'), 3000);
                         this.reset();
                         document.getElementById('file-name').textContent = 'Dosya seçilmedi';
+                        errorElement.classList.add('hidden');
                     } catch (error) {
                         console.error('Dosya dönüştürme hatası:', error);
                         errorElement.classList.remove('hidden');
@@ -459,8 +463,6 @@
                     }
                 });
 
-                // Diğer formların submit olaylarını buraya ekleyebilirsiniz.
-                // Örneğin: blog-form, project-form, education-form
                 // Handle blog form submission
                 document.getElementById('blog-form').addEventListener('submit', function(e) {
                     e.preventDefault();
@@ -481,7 +483,7 @@
                     }
                     this.reset();
                     document.getElementById('blog-id').value = '';
-                    document.getElementById('blog-content').value = '';
+                    document.getElementById('blog-submit-btn').textContent = 'Yazıyı Kaydet';
                     renderBlogPosts();
                 });
 
@@ -515,12 +517,8 @@
                 });
 
             } catch (error) {
-                console.error("Ana uygulama kurulumunda bir hata oluştu:", error);
-                alert("Uygulama başlatılırken kritik bir hata oluştu. Lütfen konsolu kontrol edin.");
+                console.error("Uygulama başlatılırken hata oluştu:", error);
             }
-
-            // İlk ikon yüklemesini yap
-            feather.replace();
         });
 
     </script>
