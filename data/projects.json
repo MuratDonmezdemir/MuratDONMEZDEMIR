@@ -1,0 +1,16 @@
+[
+  {
+    "id": "proj-01",
+    "title": "AI Destekli Test Otomasyon Framework'ü",
+    "description": "PyTest ve Selenium tabanlı, görüntü işleme ile elementleri tanıyan ve kendi kendini onaran bir test otomasyon projesi.",
+    "tags": ["Python", "PyTest", "Selenium", "OpenCV", "AI"],
+    "link": "https://github.com/MuratDonmezdemir/ai-test-framework"
+  },
+  {
+    "id": "proj-02",
+    "title": "Kişisel Web Sitesi",
+    "description": "Bu web sitesinin geliştirilmesi. TailwindCSS, JavaScript ve JSON tabanlı dinamik içerik yönetimi.",
+    "tags": ["HTML", "TailwindCSS", "JavaScript", "JSON"],
+    "link": "https://github.com/MuratDonmezdemir/my-personel-web-site"
+  }
+]

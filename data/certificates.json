@@ -1,0 +1,66 @@
+[
+  {
+    "id": "cert-01",
+    "name": "ISTQB Certified Tester",
+    "organization": "ISTQB® - International Software Testing Qualifications Board",
+    "date": "2024-05-20",
+    "fileUrl": "sertifika/Yazılım_Testine_Giriş_Sertifika_1.jpg",
+    "thumbnail": "sertifika/Yazılım_Testine_Giriş_Sertifika_1.jpg"
+  },
+  {
+    "id": "cert-02",
+    "name": "Full-Stack Web Developer",
+    "organization": "Udemy",
+    "date": "2023-11-15",
+    "fileUrl": "sertifika/udemy sıfırdan ileri düzey pyhton_1.jpg",
+    "thumbnail": "sertifika/udemy sıfırdan ileri düzey pyhton_1.jpg"
+  },
+  {
+    "id": "cert-03",
+    "name": "C# Programlama",
+    "organization": "Udemy",
+    "date": "2023-08-10",
+    "fileUrl": "sertifika/CSharp_Programlama_Sertifika_1.jpg",
+    "thumbnail": "sertifika/CSharp_Programlama_Sertifika_1.jpg"
+  },
+  {
+    "id": "cert-04",
+    "name": "Scrum Master",
+    "organization": "Scrum Alliance",
+    "date": "2023-06-15",
+    "fileUrl": "sertifika/Scrum_Sertifika_1.jpg",
+    "thumbnail": "sertifika/Scrum_Sertifika_1.jpg"
+  },
+  {
+    "id": "cert-05",
+    "name": "SQL Öğreniyorum",
+    "organization": "BTK Akademi",
+    "date": "2023-04-20",
+    "fileUrl": "sertifika/Uygulamalarla_SQL_Öğreniyorum_Sertifika_1.jpg",
+    "thumbnail": "sertifika/Uygulamalarla_SQL_Öğreniyorum_Sertifika_1.jpg"
+  },
+  {
+    "id": "cert-06",
+    "name": "Yapay Zeka",
+    "organization": "WiseQuarter",
+    "date": "2023-03-10",
+    "fileUrl": "sertifika/yapay zeka sertifika wisequarter_1.jpg",
+    "thumbnail": "sertifika/yapay zeka sertifika wisequarter_1.jpg"
+  },
+  {
+    "id": "cert-07",
+    "name": "Güvenlik Duvarına Giriş",
+    "organization": "BTK Akademi",
+    "date": "2023-02-15",
+    "fileUrl": "sertifika/Güvenlik_Duvarına_Giriş_Sertifika_1.jpg",
+    "thumbnail": "sertifika/Güvenlik_Duvarına_Giriş_Sertifika_1.jpg"
+  },
+  {
+    "id": "cert-08",
+    "name": "Proje Yönetimi",
+    "organization": "BTK Akademi",
+    "date": "2023-01-20",
+    "fileUrl": "sertifika/Proje_Yönetimi__Sertifika_1.jpg",
+    "thumbnail": "sertifika/Proje_Yönetimi__Sertifika_1.jpg"
+  }
+]

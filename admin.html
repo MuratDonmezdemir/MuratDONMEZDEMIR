@@ -1,528 +1,2836 @@
 <!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Yönetim Paneli - Murat Dönmezdemir</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <style>
-        .login-form {
-            max-width: 400px;
-        }
-        .admin-nav {
-            background: url('https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-08-17%20171506.png') center/cover no-repeat;
-        }
-    </style>
-</head>
-<body class="bg-gray-100 font-sans antialiased">
 
-    <!-- Login Screen (shown by default) -->
-    <div id="login-screen" class="min-h-screen flex items-center justify-center p-4" style="background: url('https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-08-17%20171506.png') center/cover no-repeat;">
-        <div class="bg-white/95 p-8 rounded-lg shadow-xl login-form backdrop-blur-sm">
-            <div class="text-center mb-8">
-                <h1 class="text-2xl font-bold text-gray-800">Yönetim Paneli Girişi</h1>
-                <p class="text-gray-600 mt-2">Lütfen kimlik bilgilerinizi girin</p>
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Paneli - İçerik Yönetimi</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Supabase JS (UMD) -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2.48.0/dist/umd/supabase.js"></script>
+
+    <style>
+
+        :root {
+
+            --bg-primary: #0f172a;
+
+            --bg-secondary: #1e293b;
+
+            --bg-tertiary: #334155;
+
+            --text-primary: #f1f5f9;
+
+            --text-secondary: #cbd5e1;
+
+            --text-muted: #94a3b8;
+
+            --accent: #06b6d4;
+
+            --accent-hover: #0891b2;
+
+            --success: #10b981;
+
+            --danger: #ef4444;
+
+            --warning: #f59e0b;
+
+            --border: #475569;
+
+            --shadow: rgba(0, 0, 0, 0.3);
+
+        }
+
+
+
+        .light {
+
+            --bg-primary: #ffffff;
+
+            --bg-secondary: #f8fafc;
+
+            --bg-tertiary: #e2e8f0;
+
+            --text-primary: #0f172a;
+
+            --text-secondary: #334155;
+
+            --text-muted: #64748b;
+
+            --accent: #0891b2;
+
+            --accent-hover: #06b6d4;
+
+            --border: #cbd5e1;
+
+            --shadow: rgba(0, 0, 0, 0.1);
+
+        }
+
+
+
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+
+        body {
+
+            font-family: 'Manrope', -apple-system, sans-serif;
+
+            background: var(--bg-primary);
+
+            color: var(--text-primary);
+
+            line-height: 1.6;
+
+            transition: background-color 0.3s ease, color 0.3s ease;
+
+            position: relative;
+
+        }
+
+
+
+        body::before {
+
+            content: '';
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            height: 100%;
+
+            background-image: url('https://pfst.cf2.poecdn.net/base/image/7ba5ca1ad6771dc0be28e178eabfc6f98b5378cc409f9bdec49c74facbe3b480?w=1024&h=1024');
+
+            background-size: cover;
+
+            background-repeat: no-repeat;
+
+            background-position: center;
+
+            background-attachment: fixed;
+
+            opacity: 0.35;
+
+            z-index: -1;
+
+            pointer-events: none;
+
+            filter: blur(2px) brightness(0.6);
+
+        }
+
+
+
+        .light body::before {
+
+            opacity: 0.4;
+
+            filter: blur(2px) brightness(0.9);
+
+        }
+
+
+
+        .container {
+
+            max-width: 1400px;
+
+            margin: 0 auto;
+
+            padding: 20px;
+
+        }
+
+
+
+        header {
+
+            background: var(--bg-secondary);
+
+            padding: 1.5rem 2rem;
+
+            border-bottom: 2px solid var(--accent);
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            box-shadow: 0 4px 6px var(--shadow);
+
+        }
+
+
+
+        .header-content {
+
+            max-width: 1400px;
+
+            margin: 0 auto;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 1rem;
+
+        }
+
+
+
+        h1 {
+
+            font-size: 1.75rem;
+
+            font-weight: 700;
+
+            background: linear-gradient(135deg, var(--accent), var(--success));
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+            background-clip: text;
+
+        }
+
+
+
+        .header-actions {
+
+            display: flex;
+
+            gap: 1rem;
+
+            align-items: center;
+
+        }
+
+
+
+        .theme-toggle {
+
+            background: var(--bg-tertiary);
+
+            border: 1px solid var(--border);
+
+            color: var(--text-primary);
+
+            padding: 0.6rem 1rem;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 1rem;
+
+            transition: all 0.3s ease;
+
+        }
+
+
+
+        .theme-toggle:hover {
+
+            background: var(--accent);
+
+            color: white;
+
+            transform: translateY(-2px);
+
+        }
+
+
+
+        .tabs {
+
+            display: flex;
+
+            gap: 0.5rem;
+
+            margin: 2rem 0;
+
+            border-bottom: 2px solid var(--border);
+
+            flex-wrap: wrap;
+
+        }
+
+
+
+        .tab {
+
+            background: transparent;
+
+            border: none;
+
+            color: var(--text-muted);
+
+            padding: 1rem 1.5rem;
+
+            cursor: pointer;
+
+            font-size: 1rem;
+
+            font-weight: 600;
+
+            border-bottom: 3px solid transparent;
+
+            transition: all 0.3s ease;
+
+            position: relative;
+
+        }
+
+
+
+        .tab:hover {
+
+            color: var(--accent);
+
+        }
+
+
+
+        .tab.active {
+
+            color: var(--accent);
+
+            border-bottom-color: var(--accent);
+
+        }
+
+
+
+        .tab-content {
+
+            display: none;
+
+        }
+
+
+
+        .tab-content.active {
+
+            display: block;
+
+            animation: fadeIn 0.4s ease;
+
+        }
+
+
+
+        @keyframes fadeIn {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(10px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+
+            }
+
+        }
+
+
+
+        .section-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 2rem;
+
+            flex-wrap: wrap;
+
+            gap: 1rem;
+
+        }
+
+
+
+        .section-header h2 {
+
+            font-size: 1.5rem;
+
+            font-weight: 700;
+
+            color: var(--text-primary);
+
+        }
+
+
+
+        .btn {
+
+            background: var(--accent);
+
+            color: white;
+
+            border: none;
+
+            padding: 0.75rem 1.5rem;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            font-size: 1rem;
+
+            font-weight: 600;
+
+            transition: all 0.3s ease;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 0.5rem;
+
+            box-shadow: 0 2px 4px var(--shadow);
+
+        }
+
+
+
+        .btn:hover {
+
+            background: var(--accent-hover);
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 4px 8px var(--shadow);
+
+        }
+
+
+
+        .btn-danger {
+
+            background: var(--danger);
+
+        }
+
+
+
+        .btn-danger:hover {
+
+            background: #dc2626;
+
+        }
+
+
+
+        .btn-small {
+
+            padding: 0.5rem 1rem;
+
+            font-size: 0.875rem;
+
+        }
+
+
+
+        .search-box {
+
+            position: relative;
+
+            margin-bottom: 1.5rem;
+
+        }
+
+
+
+        .search-box input {
+
+            width: 100%;
+
+            padding: 0.875rem 1rem 0.875rem 3rem;
+
+            background: var(--bg-secondary);
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+
+            color: var(--text-primary);
+
+            font-size: 1rem;
+
+            transition: all 0.3s ease;
+
+        }
+
+
+
+        .search-box input:focus {
+
+            outline: none;
+
+            border-color: var(--accent);
+
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+
+        }
+
+
+
+        .search-box i {
+
+            position: absolute;
+
+            left: 1rem;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: var(--text-muted);
+
+        }
+
+
+
+        .card-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+
+            gap: 1.5rem;
+
+            margin-top: 1.5rem;
+
+        }
+
+
+
+        .card {
+
+            background: var(--bg-secondary);
+
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            padding: 1.5rem;
+
+            transition: all 0.3s ease;
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+
+
+        .card::before {
+
+            content: '';
+
+            position: absolute;
+
+            top: 0;
+
+            left: 0;
+
+            right: 0;
+
+            height: 4px;
+
+            background: linear-gradient(90deg, var(--accent), var(--success));
+
+        }
+
+
+
+        .card:hover {
+
+            transform: translateY(-4px);
+
+            box-shadow: 0 8px 24px var(--shadow);
+
+            border-color: var(--accent);
+
+        }
+
+
+
+        .card-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: flex-start;
+
+            margin-bottom: 1rem;
+
+        }
+
+
+
+        .card-title {
+
+            font-size: 1.25rem;
+
+            font-weight: 700;
+
+            color: var(--text-primary);
+
+            margin-bottom: 0.5rem;
+
+        }
+
+
+
+        .card-meta {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 1rem;
+
+            margin: 0.75rem 0;
+
+            font-size: 0.875rem;
+
+            color: var(--text-muted);
+
+        }
+
+
+
+        .card-meta span {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.25rem;
+
+        }
+
+
+
+        .card-description {
+
+            color: var(--text-secondary);
+
+            line-height: 1.6;
+
+            margin: 1rem 0;
+
+        }
+
+
+
+        .card-actions {
+
+            display: flex;
+
+            gap: 0.75rem;
+
+            margin-top: 1rem;
+
+            padding-top: 1rem;
+
+            border-top: 1px solid var(--border);
+
+        }
+
+
+
+        .icon-btn {
+
+            background: var(--bg-tertiary);
+
+            border: 1px solid var(--border);
+
+            color: var(--text-primary);
+
+            padding: 0.5rem 0.75rem;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            transition: all 0.3s ease;
+
+            font-size: 0.875rem;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 0.5rem;
+
+        }
+
+
+
+        .icon-btn:hover {
+
+            background: var(--accent);
+
+            color: white;
+
+            transform: scale(1.05);
+
+        }
+
+
+
+        .icon-btn.delete:hover {
+
+            background: var(--danger);
+
+        }
+
+
+
+        .modal {
+
+            display: none;
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            right: 0;
+
+            bottom: 0;
+
+            background: rgba(0, 0, 0, 0.7);
+
+            backdrop-filter: blur(4px);
+
+            z-index: 1000;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+        }
+
+
+
+        .modal.show {
+
+            display: flex;
+
+            animation: modalFadeIn 0.3s ease;
+
+        }
+
+
+
+        @keyframes modalFadeIn {
+
+            from {
+
+                opacity: 0;
+
+            }
+
+            to {
+
+                opacity: 1;
+
+            }
+
+        }
+
+
+
+        .modal-content {
+
+            background: var(--bg-secondary);
+
+            border-radius: 16px;
+
+            padding: 2rem;
+
+            max-width: 600px;
+
+            width: 100%;
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            box-shadow: 0 20px 60px var(--shadow);
+
+            animation: modalSlideUp 0.3s ease;
+
+        }
+
+
+
+        @keyframes modalSlideUp {
+
+            from {
+
+                transform: translateY(30px);
+
+                opacity: 0;
+
+            }
+
+            to {
+
+                transform: translateY(0);
+
+                opacity: 1;
+
+            }
+
+        }
+
+
+
+        .modal-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 1.5rem;
+
+            padding-bottom: 1rem;
+
+            border-bottom: 2px solid var(--border);
+
+        }
+
+
+
+        .modal-header h3 {
+
+            font-size: 1.5rem;
+
+            font-weight: 700;
+
+            color: var(--text-primary);
+
+        }
+
+
+
+        .close-btn {
+
+            background: var(--bg-tertiary);
+
+            border: none;
+
+            color: var(--text-muted);
+
+            font-size: 1.5rem;
+
+            cursor: pointer;
+
+            width: 36px;
+
+            height: 36px;
+
+            border-radius: 8px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            transition: all 0.3s ease;
+
+        }
+
+
+
+        .close-btn:hover {
+
+            background: var(--danger);
+
+            color: white;
+
+            transform: rotate(90deg);
+
+        }
+
+
+
+        .form-group {
+
+            margin-bottom: 1.5rem;
+
+        }
+
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 0.5rem;
+
+            font-weight: 600;
+
+            color: var(--text-primary);
+
+        }
+
+
+
+        .form-group input,
+
+        .form-group textarea,
+
+        .form-group select {
+
+            width: 100%;
+
+            padding: 0.875rem;
+
+            background: var(--bg-tertiary);
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+
+            color: var(--text-primary);
+
+            font-size: 16px;
+
+            font-family: inherit;
+
+            transition: all 0.3s ease;
+
+        }
+
+
+
+        .form-group textarea {
+
+            min-height: 120px;
+
+            resize: vertical;
+
+        }
+
+
+
+        .form-group input:focus,
+
+        .form-group textarea:focus,
+
+        .form-group select:focus {
+
+            outline: none;
+
+            border-color: var(--accent);
+
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+
+        }
+
+
+
+        .form-actions {
+
+            display: flex;
+
+            gap: 1rem;
+
+            justify-content: flex-end;
+
+            margin-top: 2rem;
+
+            padding-top: 1.5rem;
+
+            border-top: 1px solid var(--border);
+
+        }
+
+
+
+        .empty-state {
+
+            text-align: center;
+
+            padding: 4rem 2rem;
+
+            color: var(--text-muted);
+
+        }
+
+
+
+        .empty-state i {
+
+            font-size: 4rem;
+
+            margin-bottom: 1rem;
+
+            opacity: 0.3;
+
+        }
+
+
+
+        .empty-state h3 {
+
+            font-size: 1.25rem;
+
+            margin-bottom: 0.5rem;
+
+            color: var(--text-secondary);
+
+        }
+
+
+
+        .badge {
+
+            display: inline-block;
+
+            padding: 0.25rem 0.75rem;
+
+            border-radius: 20px;
+
+            font-size: 0.75rem;
+
+            font-weight: 600;
+
+            background: var(--accent);
+
+            color: white;
+
+        }
+
+
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+            gap: 1.5rem;
+
+            margin-bottom: 2rem;
+
+        }
+
+
+
+        .stat-card {
+
+            background: var(--bg-secondary);
+
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            padding: 1.5rem;
+
+            text-align: center;
+
+            transition: all 0.3s ease;
+
+        }
+
+
+
+        .stat-card:hover {
+
+            transform: translateY(-4px);
+
+            box-shadow: 0 8px 24px var(--shadow);
+
+        }
+
+
+
+        .stat-number {
+
+            font-size: 2.5rem;
+
+            font-weight: 700;
+
+            background: linear-gradient(135deg, var(--accent), var(--success));
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+            background-clip: text;
+
+        }
+
+
+
+        .stat-label {
+
+            color: var(--text-muted);
+
+            font-size: 0.875rem;
+
+            margin-top: 0.5rem;
+
+        }
+
+
+
+        @media (max-width: 768px) {
+
+            .container {
+
+                padding: 10px;
+
+            }
+
+
+
+            header {
+
+                padding: 1rem;
+
+            }
+
+
+
+            h1 {
+
+                font-size: 1.25rem;
+
+            }
+
+
+
+            .card-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+
+            .modal-content {
+
+                padding: 1.5rem;
+
+            }
+
+
+
+            .tabs {
+
+                overflow-x: auto;
+
+                -webkit-overflow-scrolling: touch;
+
+            }
+
+
+
+            .tab {
+
+                white-space: nowrap;
+
+            }
+
+        }
+
+
+
+        /* Login Screen */
+        #loginScreen {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(-45deg, #0f172a, #1e293b, #0f172a, #164e63);
+            background-size: 400% 400%;
+            animation: gradientBg 10s ease infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        @keyframes gradientBg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .login-box {
+            background: rgba(30, 41, 59, 0.9);
+            border: 1px solid #475569;
+            border-radius: 20px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            animation: modalSlideUp 0.5s ease;
+        }
+        .login-logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .login-logo i {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #06b6d4, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .login-logo h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-top: 0.75rem;
+        }
+        .login-logo p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+        .login-input {
+            width: 100%;
+            padding: 0.875rem 1rem 0.875rem 3rem;
+            background: #334155;
+            border: 1px solid #475569;
+            border-radius: 10px;
+            color: #f1f5f9;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+        .login-input:focus {
+            outline: none;
+            border-color: #06b6d4;
+            box-shadow: 0 0 0 3px rgba(6,182,212,0.15);
+        }
+        .login-input-wrap {
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+        .login-input-wrap i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(6,182,212,0.4);
+        }
+        .login-error {
+            color: #ef4444;
+            font-size: 0.875rem;
+            text-align: center;
+            margin-top: 1rem;
+            display: none;
+        }
+        /* File Upload */
+        .file-drop-zone {
+            border: 2px dashed var(--border);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-muted);
+        }
+        .file-drop-zone:hover, .file-drop-zone.dragover {
+            border-color: var(--accent);
+            background: rgba(6,182,212,0.05);
+            color: var(--accent);
+        }
+        .file-drop-zone i { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
+        .file-drop-zone p { margin: 0.25rem 0; font-weight: 600; }
+        .file-drop-zone span { font-size: 0.8rem; }
+        .file-preview {
+            margin-top: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.875rem;
+        }
+        .file-preview i { color: var(--accent); font-size: 1.25rem; }
+        .file-preview .file-name { flex: 1; color: var(--text-primary); word-break: break-all; }
+        .file-preview .remove-file {
+            color: var(--danger);
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            padding: 0.25rem;
+        }
+        .file-preview img { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; }
+        /* Confirm Dialog Styles */
+
+        .confirm-dialog {
+
+            display: none;
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            right: 0;
+
+            bottom: 0;
+
+            background: rgba(0, 0, 0, 0.7);
+
+            backdrop-filter: blur(4px);
+
+            z-index: 2000;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+        }
+
+
+
+        .confirm-dialog.show {
+
+            display: flex;
+
+            animation: modalFadeIn 0.3s ease;
+
+        }
+
+
+
+        .confirm-dialog-content {
+
+            background: var(--bg-secondary);
+
+            border-radius: 12px;
+
+            padding: 2rem;
+
+            max-width: 400px;
+
+            width: 100%;
+
+            box-shadow: 0 20px 60px var(--shadow);
+
+            animation: modalSlideUp 0.3s ease;
+
+        }
+
+
+
+        .confirm-dialog-message {
+
+            color: var(--text-primary);
+
+            margin-bottom: 1.5rem;
+
+            font-size: 1.1rem;
+
+            text-align: center;
+
+        }
+
+
+
+        .confirm-dialog-actions {
+
+            display: flex;
+
+            gap: 1rem;
+
+            justify-content: center;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Login Screen -->
+    <div id="loginScreen">
+        <div class="login-box">
+            <div class="login-logo">
+                <i class="fas fa-shield-alt"></i>
+                <h2>Yönetim Paneli</h2>
+                <p>Devam etmek için giriş yapın</p>
             </div>
-            <form id="login-form">
-                <div class="mb-4">
-                    <label for="username" class="block text-gray-700 mb-2 font-medium">Kullanıcı Adı</label>
-                    <input type="text" id="username" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="login-input-wrap">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="loginUsername" class="login-input" placeholder="Kullanıcı Adı" required autocomplete="off" />
                 </div>
-                <div class="mb-6">
-                    <label for="password" class="block text-gray-700 mb-2 font-medium">Şifre</label>
-                    <input type="password" id="password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                <div class="login-input-wrap">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="loginPassword" class="login-input" placeholder="Şifre" required />
                 </div>
-                <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 flex items-center justify-center">
-                    <i data-feather="log-in" class="w-4 h-4 mr-2"></i> Giriş Yap
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> Giriş Yap
                 </button>
-                <div id="login-error" class="mt-4 text-red-600 text-sm hidden">
-                    <i data-feather="alert-circle" class="w-4 h-4 inline mr-1"></i> Hatalı kullanıcı adı veya şifre!
-                </div>
+                <div class="login-error" id="loginError">❌ Kullanıcı adı veya şifre hatalı!</div>
             </form>
         </div>
     </div>
 
-    <!-- Admin Panel (hidden by default) -->
-    <div id="admin-panel" class="hidden">
-        <!-- Admin Navigation -->
-        <nav class="admin-nav text-white shadow-md">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between h-16 items-center">
-                    <span class="text-xl font-bold">Yönetim Paneli</span>
-                    <div class="flex items-center space-x-4">
-                        <span class="text-sm">Hoşgeldiniz, Murat</span>
-                        <button id="logout-btn" class="text-white hover:text-gray-200 flex items-center">
-                            <i data-feather="log-out" class="w-4 h-4 mr-1"></i> Çıkış Yap
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </nav>
+    <header>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="header-content">
 
-            <!-- Sertifika Yönetimi -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
-                <div class="p-6 border-b"><h2 class="text-xl font-semibold text-gray-800">Sertifika Yönetimi</h2></div>
-                <div class="p-6">
-                    <form id="certificate-form" class="space-y-4">
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <input type="text" id="certificate-name" placeholder="Sertifika Adı" class="w-full px-4 py-2 border rounded-md" required>
-                            <input type="text" id="issuing-org" placeholder="Veren Kurum" class="w-full px-4 py-2 border rounded-md" required>
-                            <input type="date" id="issue-date" class="w-full px-4 py-2 border rounded-md" required>
-                            <input type="file" id="pdf-file" accept=".pdf,.jpg,.jpeg,.png" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" required>
-                        </div>
-                        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700">Sertifika Ekle</button>
-                    </form>
-                </div>
-                <div id="certificate-list" class="divide-y divide-gray-200"></div>
+            <h1><i class="fas fa-cog"></i> İçerik Yönetim Paneli</h1>
+
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+                <button class="theme-toggle" onclick="document.getElementById('loginScreen').style.display='flex'" title="Çıkış Yap">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
             </div>
 
-            <!-- Blog Yönetimi -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
-                <div class="p-6 border-b"><h2 class="text-xl font-semibold text-gray-800">Blog Yönetimi</h2></div>
-                <div class="p-6">
-                    <form id="blog-form" class="space-y-4">
-                        <input type="hidden" id="blog-id">
-                        <input type="text" id="blog-title" placeholder="Blog Başlığı" class="w-full px-4 py-2 border rounded-md" required>
-                        <textarea id="blog-excerpt" placeholder="Özet" rows="2" class="w-full px-4 py-2 border rounded-md" required></textarea>
-                        <textarea id="blog-content" placeholder="Tam İçerik (HTML destekler)" rows="6" class="w-full px-4 py-2 border rounded-md"></textarea>
-                        <input type="text" id="blog-image-url" placeholder="Görsel URL" class="w-full px-4 py-2 border rounded-md">
-                        <input type="text" id="blog-tags" placeholder="Etiketler (virgülle ayırın)" class="w-full px-4 py-2 border rounded-md">
-                        <button type="submit" id="blog-submit-btn" class="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700">Yazıyı Kaydet</button>
-                    </form>
-                </div>
-                <div id="blog-list" class="divide-y divide-gray-200"></div>
-            </div>
-
-            <!-- Proje Yönetimi -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
-                <div class="p-6 border-b"><h2 class="text-xl font-semibold text-gray-800">Proje Yönetimi</h2></div>
-                <div class="p-6">
-                    <form id="project-form" class="space-y-4">
-                        <input type="text" id="project-title" placeholder="Proje Başlığı" class="w-full px-4 py-2 border rounded-md" required>
-                        <textarea id="project-description" placeholder="Açıklama" rows="2" class="w-full px-4 py-2 border rounded-md" required></textarea>
-                        <input type="text" id="project-tags" placeholder="Teknolojiler (virgülle ayırın)" class="w-full px-4 py-2 border rounded-md">
-                        <input type="text" id="project-link" placeholder="Proje Linki" class="w-full px-4 py-2 border rounded-md">
-                        <button type="submit" class="bg-purple-600 text-white px-6 py-2 rounded-md hover:bg-purple-700">Proje Ekle</button>
-                    </form>
-                </div>
-                <div id="project-list" class="divide-y divide-gray-200"></div>
-            </div>
-
-            <!-- Eğitim Yönetimi -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
-                <div class="p-6 border-b"><h2 class="text-xl font-semibold text-gray-800">Eğitim Yönetimi</h2></div>
-                <div class="p-6">
-                    <form id="education-form" class="space-y-4">
-                        <div class="grid md:grid-cols-3 gap-4">
-                            <input type="text" id="education-title" placeholder="Eğitim Başlığı" class="w-full px-4 py-2 border rounded-md" required>
-                            <input type="text" id="education-institution" placeholder="Kurum" class="w-full px-4 py-2 border rounded-md" required>
-                            <input type="text" id="education-date" placeholder="Mezuniyet Yılı" class="w-full px-4 py-2 border rounded-md" required>
-                        </div>
-                        <button type="submit" class="bg-yellow-600 text-white px-6 py-2 rounded-md hover:bg-yellow-700">Eğitim Ekle</button>
-                    </form>
-                </div>
-                <div id="education-list" class="divide-y divide-gray-200"></div>
-            </div>
-
-            <!-- Gelen Mesajlar -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <div class="p-6 border-b"><h2 class="text-xl font-semibold text-gray-800">Gelen Mesajlar</h2></div>
-                <div id="message-list" class="divide-y divide-gray-200"></div>
-            </div>
         </div>
+
+    </header>
+
+
+
+    <div class="container">
+
+        <!-- Stats -->
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <div class="stat-number" id="statEducation">0</div>
+
+                <div class="stat-label">Eğitim</div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-number" id="statCertificate">0</div>
+
+                <div class="stat-label">Sertifika</div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-number" id="statBlog">0</div>
+
+                <div class="stat-label">Blog Yazısı</div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Tabs -->
+
+        <div class="tabs">
+
+            <button class="tab active" data-tab="education">
+
+                <i class="fas fa-graduation-cap"></i> Eğitim Bilgileri
+
+            </button>
+
+            <button class="tab" data-tab="certificates">
+
+                <i class="fas fa-certificate"></i> Sertifikalar
+
+            </button>
+
+            <button class="tab" data-tab="blogs">
+
+                <i class="fas fa-blog"></i> Blog Yazıları
+
+            </button>
+
+        </div>
+
+
+
+        <!-- Education Tab -->
+
+        <div class="tab-content active" id="education">
+
+            <div class="section-header">
+
+                <h2>Eğitim Bilgileri</h2>
+
+                <button class="btn" onclick="openEducationModal()">
+
+                    <i class="fas fa-plus"></i> Yeni Eğitim Ekle
+
+                </button>
+
+            </div>
+
+            <div class="search-box">
+
+                <i class="fas fa-search"></i>
+
+                <input type="text" id="searchEducation" placeholder="Eğitim ara...">
+
+            </div>
+
+            <div class="card-grid" id="educationList"></div>
+
+        </div>
+
+
+
+        <!-- Certificates Tab -->
+
+        <div class="tab-content" id="certificates">
+
+            <div class="section-header">
+
+                <h2>Sertifikalar</h2>
+
+                <button class="btn" onclick="openCertificateModal()">
+
+                    <i class="fas fa-plus"></i> Yeni Sertifika Ekle
+
+                </button>
+
+            </div>
+
+            <div class="search-box">
+
+                <i class="fas fa-search"></i>
+
+                <input type="text" id="searchCertificate" placeholder="Sertifika ara...">
+
+            </div>
+
+            <div class="card-grid" id="certificateList"></div>
+
+        </div>
+
+
+
+        <!-- Blogs Tab -->
+
+        <div class="tab-content" id="blogs">
+
+            <div class="section-header">
+
+                <h2>Blog Yazıları</h2>
+
+                <button class="btn" onclick="openBlogModal()">
+
+                    <i class="fas fa-plus"></i> Yeni Blog Yazısı Ekle
+
+                </button>
+
+            </div>
+
+            <div class="search-box">
+
+                <i class="fas fa-search"></i>
+
+                <input type="text" id="searchBlog" placeholder="Blog yazısı ara...">
+
+            </div>
+
+            <div class="card-grid" id="blogList"></div>
+
+        </div>
+
     </div>
 
-    <script>
-        // =================================================================================
-        // DATA MANAGEMENT (localStorage)
-        // =================================================================================
-        const LocalData = {
-            getBlogPosts: () => JSON.parse(localStorage.getItem('blogPosts') || '[]'),
-            addBlogPost: (p) => { const d = LocalData.getBlogPosts(); d.unshift(p); localStorage.setItem('blogPosts', JSON.stringify(d)); },
-            deleteBlogPost: (id) => { let d = LocalData.getBlogPosts(); localStorage.setItem('blogPosts', JSON.stringify(d.filter(p => p.id !== id))); },
-            updateBlogPost: (id, updatedPost) => {
-                let d = LocalData.getBlogPosts();
-                localStorage.setItem('blogPosts', JSON.stringify(d.map(p => (p.id === id ? updatedPost : p))));
-            },
-            getEducations: () => JSON.parse(localStorage.getItem('educations') || '[]'),
-            addEducation: (e) => { const d = LocalData.getEducations(); d.unshift(e); localStorage.setItem('educations', JSON.stringify(d)); },
-            deleteEducation: (id) => { let d = LocalData.getEducations(); localStorage.setItem('educations', JSON.stringify(d.filter(e => e.id !== id))); },
-            getProjects: () => JSON.parse(localStorage.getItem('projects') || '[]'),
-            addProject: (p) => { const d = LocalData.getProjects(); d.unshift(p); localStorage.setItem('projects', JSON.stringify(d)); },
-            deleteProject: (id) => { let d = LocalData.getProjects(); localStorage.setItem('projects', JSON.stringify(d.filter(p => p.id !== id))); },
-            getContacts: () => JSON.parse(localStorage.getItem('contacts') || '[]'),
-            deleteContact: (id) => { let d = LocalData.getContacts(); localStorage.setItem('contacts', JSON.stringify(d.filter(c => c.id !== id))); },
-            getCertificates: () => JSON.parse(localStorage.getItem('certificates') || '[]'),
-            addCertificate: (c) => { const d = LocalData.getCertificates(); d.unshift(c); localStorage.setItem('certificates', JSON.stringify(d)); },
-            deleteCertificate: (id) => { let d = LocalData.getCertificates(); localStorage.setItem('certificates', JSON.stringify(d.filter(c => c.id !== id))); },
-            fileToBase64: (file) => new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = error => reject(error);
-            })
-        };
 
-        // =================================================================================
-        // RENDER FUNCTIONS (UI)
-        // =================================================================================
-        function renderBlogPosts() {
-            const posts = LocalData.getBlogPosts();
-            const listElement = document.getElementById('blog-list');
-            listElement.innerHTML = posts.length === 0 ? '<p class="p-4 text-center text-gray-500">Henüz blog yazısı yok.</p>' :
-                posts.map(post => `
-                    <div class="p-4 flex justify-between items-center">
-                        <div>
-                            <p class="font-medium">${post.title}</p>
-                            <p class="text-sm text-gray-500">${new Date(post.createdAt).toLocaleDateString('tr-TR')}</p>
-                        </div>
-                        <div>
-                            <button onclick="editBlogPost('${post.id}')" class="p-2 text-blue-600 hover:text-blue-800"><i data-feather="edit"></i></button>
-                            <button onclick="deleteBlogPost('${post.id}')" class="p-2 text-red-600 hover:text-red-800"><i data-feather="trash-2"></i></button>
-                        </div>
+
+    <!-- Education Modal -->
+
+    <div class="modal" id="educationModal">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h3 id="educationModalTitle">Yeni Eğitim Ekle</h3>
+
+                <button class="close-btn" onclick="closeEducationModal()">
+
+                    <i class="fas fa-times"></i>
+
+                </button>
+
+            </div>
+
+            <form id="educationForm">
+                <input type="hidden" id="educationId">
+                <div class="form-group">
+                    <label for="educationTitle">Eğitim Başlığı *</label>
+                    <input type="text" id="educationTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="educationInstitution">Kurum *</label>
+                    <input type="text" id="educationInstitution" required>
+                </div>
+                <div class="form-group">
+                    <label for="educationDate">Tarih *</label>
+                    <input type="date" id="educationDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="educationDuration">Süre</label>
+                    <input type="text" id="educationDuration" placeholder="Örn: 4 Yıl">
+                </div>
+                <div class="form-group">
+                    <label>Belge / Diploma (PDF, JPG, PNG)</label>
+                    <div class="file-drop-zone" id="eduDropZone" onclick="document.getElementById('eduFile').click()">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Dosyayı sürükleyin veya tıklayın</p>
+                        <span>PDF, JPG, PNG, DOC &bull; Maks 20MB</span>
                     </div>
-                `).join('');
+                    <input type="file" id="eduFile" accept=".pdf,.jpg,.jpeg,.png,.webp,.doc,.docx" style="display:none" onchange="handleFileSelect(this,'eduDropZone','eduFileUrl')">
+                    <input type="hidden" id="eduFileUrl">
+                    <div id="eduFilePreview" class="file-preview" style="display:none"></div>
+                </div>
+                <div class="form-group">
+                    <label for="educationDescription">Açıklama</label>
+                    <textarea id="educationDescription"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" style="background: var(--bg-tertiary); color: var(--text-primary);" onclick="closeEducationModal()">İptal</button>
+                    <button type="submit" class="btn"><i class="fas fa-save"></i> Kaydet</button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Certificate Modal -->
+
+    <div class="modal" id="certificateModal">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h3 id="certificateModalTitle">Yeni Sertifika Ekle</h3>
+
+                <button class="close-btn" onclick="closeCertificateModal()">
+
+                    <i class="fas fa-times"></i>
+
+                </button>
+
+            </div>
+
+            <form id="certificateForm">
+                <input type="hidden" id="certificateId">
+                <div class="form-group">
+                    <label for="certificateName">Sertifika Adı *</label>
+                    <input type="text" id="certificateName" required>
+                </div>
+                <div class="form-group">
+                    <label for="certificateIssuer">Veren Kurum *</label>
+                    <input type="text" id="certificateIssuer" required>
+                </div>
+                <div class="form-group">
+                    <label for="certificateDate">Tarih *</label>
+                    <input type="date" id="certificateDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Sertifika Dosyası (PDF, JPG, PNG)</label>
+                    <div class="file-drop-zone" id="certDropZone" onclick="document.getElementById('certFile').click()">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Dosyayı sürükleyin veya tıklayın</p>
+                        <span>PDF, JPG, PNG &bull; Maks 20MB</span>
+                    </div>
+                    <input type="file" id="certFile" accept=".pdf,.jpg,.jpeg,.png,.webp" style="display:none" onchange="handleFileSelect(this,'certDropZone','certFileUrl')">
+                    <input type="hidden" id="certFileUrl">
+                    <div id="certFilePreview" class="file-preview" style="display:none"></div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" style="background: var(--bg-tertiary); color: var(--text-primary);" onclick="closeCertificateModal()">İptal</button>
+                    <button type="submit" class="btn"><i class="fas fa-save"></i> Kaydet</button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Blog Modal -->
+
+    <div class="modal" id="blogModal">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h3 id="blogModalTitle">Yeni Blog Yazısı Ekle</h3>
+
+                <button class="close-btn" onclick="closeBlogModal()">
+
+                    <i class="fas fa-times"></i>
+
+                </button>
+
+            </div>
+
+            <form id="blogForm">
+                <input type="hidden" id="blogId">
+                <div class="form-group">
+                    <label for="blogTitle">Başlık *</label>
+                    <input type="text" id="blogTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="blogDate">Tarih *</label>
+                    <input type="date" id="blogDate" required>
+                </div>
+                <div class="form-group">
+                    <label>Kapak Görseli veya Dosya (PDF, DOC, JPG)</label>
+                    <div class="file-drop-zone" id="blogDropZone" onclick="document.getElementById('blogFile').click()">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Dosyayı sürükleyin veya tıklayın</p>
+                        <span>PDF, DOC, DOCX, JPG, PNG &bull; Maks 20MB</span>
+                    </div>
+                    <input type="file" id="blogFile" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.webp,.txt" style="display:none" onchange="handleFileSelect(this,'blogDropZone','blogFileUrl')">
+                    <input type="hidden" id="blogFileUrl">
+                    <div id="blogFilePreview" class="file-preview" style="display:none"></div>
+                </div>
+                <div class="form-group">
+                    <label for="blogContent">İçerik *</label>
+                    <textarea id="blogContent" required style="min-height: 250px;" placeholder="Blog yazınızı buraya yazın..."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn" style="background: var(--bg-tertiary); color: var(--text-primary);" onclick="closeBlogModal()">İptal</button>
+                    <button type="submit" class="btn"><i class="fas fa-save"></i> Kaydet</button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Confirm Dialog -->
+
+    <div class="confirm-dialog" id="confirmDialog">
+
+        <div class="confirm-dialog-content">
+
+            <div class="confirm-dialog-message" id="confirmMessage"></div>
+
+            <div class="confirm-dialog-actions">
+
+                <button class="btn" style="background: var(--bg-tertiary); color: var(--text-primary);" onclick="closeConfirmDialog()">
+
+                    İptal
+
+                </button>
+
+                <button class="btn btn-danger" id="confirmBtn">
+
+                    <i class="fas fa-trash"></i> Sil
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+        // LOGIN
+        function handleLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value.trim().toLowerCase();
+            const password = document.getElementById('loginPassword').value;
+            const error = document.getElementById('loginError');
+            if (username === 'arzumende' && password === '737660') {
+                document.getElementById('loginScreen').style.animation = 'modalFadeIn 0.3s ease reverse';
+                setTimeout(() => document.getElementById('loginScreen').style.display = 'none', 300);
+            } else {
+                error.style.display = 'block';
+                document.getElementById('loginPassword').value = '';
+                setTimeout(() => error.style.display = 'none', 3000);
+            }
         }
 
-        function editBlogPost(id) {
-            const posts = LocalData.getBlogPosts();
-            const postToEdit = posts.find(p => p.id === id);
-            if (!postToEdit) return;
+        const API_URL = 'http://localhost:5000/api';
 
-            // Populate form
-            document.getElementById('blog-id').value = postToEdit.id;
-            document.getElementById('blog-title').value = postToEdit.title;
-            document.getElementById('blog-excerpt').value = postToEdit.excerpt;
-            document.getElementById('blog-image-url').value = postToEdit.imageUrl;
-            document.getElementById('blog-content').value = postToEdit.content || ''; // Set content for textarea
-            document.getElementById('blog-tags').value = postToEdit.tags.join(', ');
-
-            // Update UI for editing
-            document.querySelector('#blog-form h2, #admin-panel h2').textContent = 'Blog Yazısını Düzenle';
-            document.getElementById('blog-submit-btn').innerHTML = '<i data-feather="save" class="w-4 h-4 mr-2"></i> Değişiklikleri Kaydet';
-            feather.replace();
-
-            // Scroll to form
-            document.getElementById('blog-form').scrollIntoView({ behavior: 'smooth' });
+        // ===================== DOSYA YÜKLEME =====================
+        async function uploadFile(file) {
+            const formData = new FormData();
+            formData.append('file', file);
+            const res = await fetch(`${API_URL}/upload`, { method: 'POST', body: formData });
+            if (!res.ok) throw new Error('Dosya yüklenemedi');
+            return await res.json();
         }
 
-        // --- Login and Page Load ---
-        function onAdminPanelLoad() {
-            // This function runs when the admin panel becomes visible
-            console.log('onAdminPanelLoad fonksiyonu çağrıldı. Dinamik veriler yükleniyor...');
-            renderBlogPosts();
-            renderCertificates();
-            renderProjects();
-            renderEducations();
-            renderMessages();
-            console.log('Tüm render fonksiyonları çağrıldı.');
-
-            // Tüm dinamik içerik yüklendikten sonra ikonları bir kez yenile
-            feather.replace();
+        function getFileIcon(filename) {
+            const ext = filename.split('.').pop().toLowerCase();
+            if (['jpg','jpeg','png','gif','webp'].includes(ext)) return 'fa-image';
+            if (ext === 'pdf') return 'fa-file-pdf';
+            if (['doc','docx'].includes(ext)) return 'fa-file-word';
+            return 'fa-file';
         }
 
-        // --- Education Management ---
-        function renderEducations() {
-            const educations = LocalData.getEducations();
-            console.log('renderEducations çağrıldı. Yüklü eğitimler:', educations);
-            const listElement = document.getElementById('education-list');
-            listElement.innerHTML = '';
+        function handleFileSelect(input, dropZoneId, hiddenId) {
+            const file = input.files[0];
+            if (!file) return;
+            const dropZone = document.getElementById(dropZoneId);
+            const previewId = dropZoneId.replace('DropZone', 'FilePreview');
+            const preview = document.getElementById(previewId);
+            const hidden = document.getElementById(hiddenId);
 
-            if (educations.length === 0) {
-                listElement.innerHTML = '<div class="p-6 text-center text-gray-500">Henüz eğitim eklenmemiş.</div>';
+            dropZone.innerHTML = `<i class="fas fa-spinner fa-spin"></i><p>Yükleniyor...</p>`;
+
+            uploadFile(file).then(data => {
+                hidden.value = data.url;
+                dropZone.innerHTML = `<i class="fas fa-check-circle" style="color:var(--success)"></i><p>Dosya yüklendi!</p>`;
+
+                const isImage = /\.(jpg|jpeg|png|gif|webp)$/i.test(data.url);
+                preview.style.display = 'flex';
+                preview.innerHTML = `
+                    ${isImage ? `<img src="${data.url}" alt="Önizleme">` : `<i class="fas ${getFileIcon(data.filename)}"></i>`}
+                    <span class="file-name">${file.name}</span>
+                    <button class="remove-file" onclick="removeFile('${dropZoneId}','${hiddenId}','${previewId}')" title="Kaldır">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+            }).catch(() => {
+                dropZone.innerHTML = `<i class="fas fa-exclamation-circle" style="color:var(--danger)"></i><p>Yükleme başarısız!</p>`;
+            });
+        }
+
+        function removeFile(dropZoneId, hiddenId, previewId) {
+            document.getElementById(hiddenId).value = '';
+            document.getElementById(previewId).style.display = 'none';
+            const dz = document.getElementById(dropZoneId);
+            const inputId = dropZoneId.replace('DropZone', 'File');
+            dz.innerHTML = `<i class="fas fa-cloud-upload-alt"></i><p>Dosyayı sürükleyin veya tıklayın</p><span>PDF, JPG, PNG, DOC &bull; Maks 20MB</span>`;
+            document.getElementById(inputId).value = '';
+        }
+
+        // Drag & Drop
+        ['certDropZone','blogDropZone','eduDropZone'].forEach(id => {
+            const zone = document.getElementById(id);
+            if (!zone) return;
+            zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+            zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+            zone.addEventListener('drop', e => {
+                e.preventDefault();
+                zone.classList.remove('dragover');
+                const inputId = id.replace('DropZone', 'File');
+                const hiddenId = id.replace('DropZone', 'FileUrl');
+                const dt = e.dataTransfer;
+                if (dt.files.length) {
+                    const fakeInput = { files: dt.files };
+                    handleFileSelect(fakeInput, id, hiddenId);
+                }
+            });
+        });
+
+        // Supabase client
+        const SUPABASE_URL = 'https://olvsouweckohvihjudbc.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9sdnNvdXdlY2tvaHZpaGp1ZGJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMzNjE4MTUsImV4cCI6MjA3ODkzNzgxNX0.N8fMPLIDk9-6txuhkJt90BfmP1ExdV3QZe0nB2Y4MmM';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Data Storage (in-memory cache)
+        let educations = [];
+        let certificates = [];
+        let blogs = [];
+
+
+
+        // Theme Toggle
+
+        const themeToggle = document.getElementById('themeToggle');
+
+        const html = document.documentElement;
+
+
+
+        // Check system preference
+
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+
+            html.classList.remove('light');
+
+        } else {
+
+            html.classList.add('light');
+
+        }
+
+
+
+        // Listen for system theme changes
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+
+            if (event.matches) {
+
+                html.classList.remove('light');
+
+                updateThemeIcon();
+
+            } else {
+
+                html.classList.add('light');
+
+                updateThemeIcon();
+
+            }
+
+        });
+
+
+
+        function updateThemeIcon() {
+
+            const isDark = !html.classList.contains('light');
+
+            themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+
+        }
+
+
+
+        themeToggle.addEventListener('click', () => {
+
+            html.classList.toggle('light');
+
+            updateThemeIcon();
+
+        });
+
+
+
+        updateThemeIcon();
+
+
+
+        // Tab Switching
+
+        document.querySelectorAll('.tab').forEach(tab => {
+
+            tab.addEventListener('click', () => {
+
+                const tabName = tab.dataset.tab;
+
+
+
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+
+
+                tab.classList.add('active');
+
+                document.getElementById(tabName).classList.add('active');
+
+            });
+
+        });
+
+
+
+        // Update Stats
+
+        function updateStats() {
+
+            document.getElementById('statEducation').textContent = educations.length;
+
+            document.getElementById('statCertificate').textContent = certificates.length;
+
+            document.getElementById('statBlog').textContent = blogs.length;
+
+        }
+
+
+
+        // EDUCATION FUNCTIONS
+
+        async function loadEducations() {
+            const { data, error } = await supabase
+                .from('educations')
+                .select('*')
+                .order('date', { ascending: false });
+
+            if (error) {
+                console.error('Eğitimler yüklenirken hata:', error);
                 return;
             }
 
-            educations.forEach(edu => {
-                const eduElement = document.createElement('div');
-                eduElement.className = 'p-6 flex justify-between items-center';
-                eduElement.innerHTML = `
-                    <div>
-                        <h3 class="font-medium text-gray-800">${edu.title}</h3>
-                        <p class="text-sm text-gray-600">${edu.institution} - ${edu.date}</p>
-                    </div>
-                    <button onclick="deleteEducation('${edu.id}')" class="text-red-600 hover:text-red-800 p-2" title="Sil">
-                        <i data-feather="trash-2" class="w-4 h-4"></i>
-                    </button>
-                `;
-                listElement.appendChild(eduElement);
-            });
+            educations = data || [];
+            renderEducations();
+            updateStats();
         }
+
+        function renderEducations(searchTerm = '') {
+
+            const list = document.getElementById('educationList');
+
+            const filtered = educations.filter(e =>
+
+                e.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+
+                e.institution.toLowerCase().includes(searchTerm.toLowerCase())
+
+            );
+
+
+
+            if (filtered.length === 0) {
+
+                list.innerHTML = `
+
+                    <div class="empty-state">
+
+                        <i class="fas fa-graduation-cap"></i>
+
+                        <h3>Henüz eğitim bilgisi bulunmuyor</h3>
+
+                        <p>Yeni eğitim eklemek için yukarıdaki butona tıklayın</p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+
+            list.innerHTML = filtered.map(edu => `
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <div class="card-title">${edu.title}</div>
+
+                            <div class="card-meta">
+
+                                <span><i class="fas fa-university"></i> ${edu.institution}</span>
+
+                                <span><i class="fas fa-calendar"></i> ${formatDate(edu.date)}</span>
+
+                                ${edu.duration ? `<span><i class="fas fa-clock"></i> ${edu.duration}</span>` : ''}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    ${edu.description ? `<div class="card-description">${edu.description}</div>` : ''}
+
+                    <div class="card-actions">
+
+                        <button class="icon-btn" onclick="editEducation('${edu.id}')">
+
+                            <i class="fas fa-edit"></i> Düzenle
+
+                        </button>
+
+                        <button class="icon-btn delete" onclick="deleteEducation('${edu.id}')">
+
+                            <i class="fas fa-trash"></i> Sil
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `).join('');
+
+        }
+
+
+
+        function openEducationModal(id = null) {
+
+            const modal = document.getElementById('educationModal');
+
+            const form = document.getElementById('educationForm');
+
+            const title = document.getElementById('educationModalTitle');
+
+
+
+            form.reset();
+
+
+
+            if (id) {
+
+                const edu = educations.find(e => e.id === id);
+
+                if (edu) {
+
+                    title.textContent = 'Eğitimi Düzenle';
+
+                    document.getElementById('educationId').value = edu.id;
+
+                    document.getElementById('educationTitle').value = edu.title;
+
+                    document.getElementById('educationInstitution').value = edu.institution;
+
+                    document.getElementById('educationDate').value = edu.date;
+
+                    document.getElementById('educationDuration').value = edu.duration || '';
+
+                    document.getElementById('educationDescription').value = edu.description || '';
+
+                }
+
+            } else {
+
+                title.textContent = 'Yeni Eğitim Ekle';
+
+                document.getElementById('educationId').value = '';
+
+            }
+
+
+
+            modal.classList.add('show');
+
+        }
+
+
+
+        function closeEducationModal() {
+
+            document.getElementById('educationModal').classList.remove('show');
+
+        }
+
+
+
+        function editEducation(id) {
+
+            openEducationModal(id);
+
+        }
+
+
 
         function deleteEducation(id) {
-            if (confirm('Bu eğitim bilgisini silmek istediğinizden emin misiniz?')) {
-                LocalData.deleteEducation(id);
+
+            showConfirmDialog('Bu eğitimi silmek istediğinize emin misiniz?', async () => {
+                const { error } = await supabase
+                    .from('educations')
+                    .delete()
+                    .eq('id', id);
+
+                if (error) {
+                    console.error('Eğitim silinirken hata:', error);
+                    alert('Eğitim silinirken bir hata oluştu.');
+                    return;
+                }
+
+                educations = educations.filter(e => e.id !== id);
                 renderEducations();
-            }
-        }
-
-        // --- Project Management ---
-        function renderProjects() {
-            const projects = LocalData.getProjects();
-            console.log('renderProjects çağrıldı. Yüklü projeler:', projects);
-            const listElement = document.getElementById('project-list');
-            listElement.innerHTML = '';
-
-            if (projects.length === 0) {
-                listElement.innerHTML = '<div class="p-6 text-center text-gray-500">Henüz proje eklenmemiş.</div>';
-                return;
-            }
-
-            projects.forEach(project => {
-                const projectElement = document.createElement('div');
-                projectElement.className = 'p-6 flex justify-between items-center';
-                projectElement.innerHTML = `
-                    <div>
-                        <h3 class="font-medium text-gray-800">${project.title}</h3>
-                        <p class="text-sm text-gray-600">${project.tags.join(', ')}</p>
-                    </div>
-                    <button onclick="deleteProject('${project.id}')" class="text-red-600 hover:text-red-800 p-2" title="Sil">
-                        <i data-feather="trash-2" class="w-4 h-4"></i>
-                    </button>
-                `;
-                listElement.appendChild(projectElement);
+                updateStats();
             });
+
         }
 
-        function deleteProject(id) {
-            if (confirm('Bu projeyi silmek istediğinizden emin misiniz?')) {
-                LocalData.deleteProject(id);
-                renderProjects();
-            }
-        }
 
-        // --- Message Management ---
-        function renderMessages() {
-            const messages = LocalData.getContacts();
-            console.log('renderMessages çağrıldı. Yüklü mesajlar:', messages);
-            const listElement = document.getElementById('message-list');
-            listElement.innerHTML = '';
 
-            if (messages.length === 0) {
-                listElement.innerHTML = '<div class="p-6 text-center text-gray-500">Gelen kutunuz boş.</div>';
-                return;
-            }
+        document.getElementById('educationForm').addEventListener('submit', async (e) => {
 
-            messages.forEach(msg => {
-                const msgElement = document.createElement('div');
-                msgElement.className = 'p-6';
-                msgElement.innerHTML = `
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <p class="font-semibold text-gray-800">${msg.name} <span class="font-normal text-gray-600">&lt;${msg.email}&gt;</span></p>
-                            <p class="text-sm text-gray-500">${new Date(msg.createdAt).toLocaleString('tr-TR')}</p>
-                        </div>
-                        <button onclick="deleteMessage('${msg.id}')" class="text-red-600 hover:text-red-800 p-2" title="Sil">
-                            <i data-feather="trash-2" class="w-4 h-4"></i>
-                        </button>
-                    </div>
-                    <p class="mt-4 text-gray-700 bg-gray-50 p-3 rounded-md">${msg.message}</p>
-                `;
-                listElement.appendChild(msgElement);
-            });
-        }
+            e.preventDefault();
 
-        function deleteMessage(id) {
-            if (confirm('Bu mesajı silmek istediğinizden emin misiniz?')) {
-                LocalData.deleteContact(id);
-                renderMessages();
-            }
-        }
 
-        // --- Certificate Management ---
-        function renderCertificates() {
-            const certs = LocalData.getCertificates();
-            console.log('renderCertificates çağrıldı. Yüklü sertifikalar:', certs);
-            const listElement = document.getElementById('certificate-list');
-            listElement.innerHTML = '';
 
-            if (certs.length === 0) {
-                listElement.innerHTML = '<div class="p-6 text-center text-gray-500">Henüz sertifika eklenmemiş.</div>';
-                return;
-            }
+            const id = document.getElementById('educationId').value;
+            const payload = {
+                title: document.getElementById('educationTitle').value,
+                institution: document.getElementById('educationInstitution').value,
+                date: document.getElementById('educationDate').value,
+                duration: document.getElementById('educationDuration').value || null,
+                description: document.getElementById('educationDescription').value || null
+            };
 
-            certs.forEach(cert => {
-                const certElement = document.createElement('div');
-                certElement.className = 'p-6 flex justify-between items-center';
-                certElement.innerHTML = `
-                    <div>
-                        <h3 class="font-medium text-gray-800">${cert.name}</h3>
-                        <p class="text-sm text-gray-600">${cert.organization} - ${new Date(cert.date).toLocaleDateString('tr-TR')}</p>
-                    </div>
-                    <div class="flex space-x-2">
-                        <a href="${cert.fileUrl}" target="_blank" class="text-blue-600 hover:text-blue-800 p-2" title="Görüntüle">
-                            <i data-feather="external-link" class="w-4 h-4"></i>
-                        </a>
-                        <button onclick="deleteCertificate('${cert.id}')" class="text-red-600 hover:text-red-800 p-2" title="Sil">
-                            <i data-feather="trash-2" class="w-4 h-4"></i>
-                        </button>
-                    </div>
-                `;
-                listElement.appendChild(certElement);
-            });
-        }
-
-        function deleteCertificate(id) {
-            if (confirm('Bu sertifikayı silmek istediğinizden emin misiniz?')) {
-                LocalData.deleteCertificate(id);
-                renderCertificates();
-            }
-        }
-
-        // --- Main Application Logic ---
-        // Sayfa yüklendiğinde tüm olay dinleyicilerini ve başlangıç fonksiyonlarını kurar.
-        document.addEventListener('DOMContentLoaded', function() {
             try {
-                // İlk ikon yüklemesini yap
-                feather.replace();
-                console.log("Sayfa yüklendi ve tüm olay dinleyicileri kuruluyor...");
+                if (id) {
+                    // Güncelle
+                    const { data, error } = await supabase
+                        .from('educations')
+                        .update(payload)
+                        .eq('id', id)
+                        .select()
+                        .single();
 
-                // Handle file input display
-                document.getElementById('pdf-file').addEventListener('change', function(e) {
-                    const fileName = e.target.files[0] ? e.target.files[0].name : 'Dosya seçilmedi';
-                    document.getElementById('file-name').textContent = fileName;
-                });
-
-                // Handle login form submission
-                document.getElementById('login-form').addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    console.log("Giriş formu gönderildi.");
-
-                    const username = document.getElementById('username').value;
-                    const password = document.getElementById('password').value;
-                    const errorElement = document.getElementById('login-error');
-                    // Kullanıcı adı büyük/küçük harf duyarlı olarak ayarlandı
-                    const isUsernameCorrect = username.trim() === 'Arzumende';
-                    const isPasswordCorrect = password.trim() === '737660';
-
-                    console.log('Giriş denemesi yapılıyor...');
-                    console.log('Kullanıcı Adı Doğru mu:', isUsernameCorrect);
-                    console.log('Şifre Doğru mu:', isPasswordCorrect);
-
-                    if (isUsernameCorrect && isPasswordCorrect) {
-                        console.log("Giriş başarılı, yönetici paneline yönlendiriliyor...");
-                        document.getElementById('login-screen').classList.add('hidden');
-                        document.getElementById('admin-panel').classList.remove('hidden');
-                        onAdminPanelLoad();
-                    } else {
-                        errorElement.classList.remove('hidden');
-                        console.log("Giriş başarısız.");
-                        setTimeout(() => {
-                            errorElement.classList.add('hidden');
-                        }, 3000);
-                    }
-                });
-
-                // Handle logout
-                document.getElementById('logout-btn').addEventListener('click', function() {
-                    document.getElementById('login-screen').classList.remove('hidden');
-                    document.getElementById('admin-panel').classList.add('hidden');
-                    document.getElementById('login-form').reset();
-                    console.log('Çıkış yapıldı.');
-                });
-
-                // Handle certificate form submission
-                document.getElementById('certificate-form').addEventListener('submit', async function(e) {
-                    e.preventDefault();
-                    const successElement = document.getElementById('upload-success');
-                    const errorElement = document.getElementById('upload-error');
-                    const fileInput = document.getElementById('pdf-file');
-
-                    if (fileInput.files.length === 0) {
-                        alert('Lütfen bir sertifika dosyası seçin.');
+                    if (error) {
+                        console.error('Eğitim güncellenirken hata:', error);
+                        alert('Eğitim güncellenirken bir hata oluştu.');
                         return;
                     }
 
-                    try {
-                        const fileBase64 = await LocalData.fileToBase64(fileInput.files[0]);
-                        const newCertificate = {
-                            id: Date.now().toString(),
-                            name: document.getElementById('certificate-name').value,
-                            organization: document.getElementById('issuing-org').value,
-                            date: document.getElementById('issue-date').value,
-                            fileUrl: fileBase64,
-                            createdAt: new Date().toISOString()
-                        };
-                        LocalData.addCertificate(newCertificate);
-                        renderCertificates();
-                        successElement.classList.remove('hidden');
-                        setTimeout(() => successElement.classList.add('hidden'), 3000);
-                        this.reset();
-                        document.getElementById('file-name').textContent = 'Dosya seçilmedi';
-                    } catch (error) {
-                        console.error('Dosya dönüştürme hatası:', error);
-                        errorElement.classList.remove('hidden');
-                        setTimeout(() => errorElement.classList.add('hidden'), 3000);
+                    const index = educations.findIndex(e => e.id === id);
+                    if (index !== -1) educations[index] = data;
+                } else {
+                    // Yeni kayıt
+                    const { data, error } = await supabase
+                        .from('educations')
+                        .insert(payload)
+                        .select()
+                        .single();
+
+                    if (error) {
+                        console.error('Eğitim eklenirken hata:', error);
+                        alert('Eğitim eklenirken bir hata oluştu.');
+                        return;
                     }
-                });
 
-                // Diğer formların submit olaylarını buraya ekleyebilirsiniz.
-                // Örneğin: blog-form, project-form, education-form
-                // Handle blog form submission
-                document.getElementById('blog-form').addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    const postId = document.getElementById('blog-id').value;
-                    const postData = {
-                        title: document.getElementById('blog-title').value,
-                        excerpt: document.getElementById('blog-excerpt').value,
-                        content: document.getElementById('blog-content').value,
-                        imageUrl: document.getElementById('blog-image-url').value,
-                        tags: document.getElementById('blog-tags').value.split(',').map(tag => tag.trim()).filter(Boolean),
-                    };
+                    educations.unshift(data);
+                }
 
-                    if (postId) {
-                        const originalPost = LocalData.getBlogPosts().find(p => p.id === postId);
-                        LocalData.updateBlogPost(postId, { ...originalPost, ...postData });
-                    } else {
-                        LocalData.addBlogPost({ ...postData, id: Date.now().toString(), createdAt: new Date().toISOString() });
-                    }
-                    this.reset();
-                    document.getElementById('blog-id').value = '';
-                    document.getElementById('blog-content').value = '';
-                    renderBlogPosts();
-                });
-
-                // Handle project form submission
-                document.getElementById('project-form').addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    LocalData.addProject({
-                        id: Date.now().toString(),
-                        title: document.getElementById('project-title').value,
-                        description: document.getElementById('project-description').value,
-                        tags: document.getElementById('project-tags').value.split(',').map(tag => tag.trim()).filter(Boolean),
-                        link: document.getElementById('project-link').value,
-                        createdAt: new Date().toISOString()
-                    });
-                    this.reset();
-                    renderProjects();
-                });
-
-                // Handle education form submission
-                document.getElementById('education-form').addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    LocalData.addEducation({
-                        id: Date.now().toString(),
-                        title: document.getElementById('education-title').value,
-                        institution: document.getElementById('education-institution').value,
-                        date: document.getElementById('education-date').value,
-                        createdAt: new Date().toISOString()
-                    });
-                    this.reset();
-                    renderEducations();
-                });
-
-            } catch (error) {
-                console.error("Ana uygulama kurulumunda bir hata oluştu:", error);
-                alert("Uygulama başlatılırken kritik bir hata oluştu. Lütfen konsolu kontrol edin.");
+                closeEducationModal();
+                renderEducations();
+                updateStats();
+            } catch (err) {
+                console.error('Eğitim kaydedilirken beklenmeyen hata:', err);
+                alert('Eğitim kaydedilirken beklenmeyen bir hata oluştu.');
             }
 
-            // İlk ikon yüklemesini yap
-            feather.replace();
         });
 
+
+
+        document.getElementById('searchEducation').addEventListener('input', (e) => {
+
+            renderEducations(e.target.value);
+
+        });
+
+
+
+        async function loadCertificates() {
+            try {
+                const res = await fetch(`${API_URL}/certificates`);
+                certificates = await res.json();
+                renderCertificates();
+                updateStats();
+            } catch (e) { console.error(e); }
+        }
+
+        // CERTIFICATE FUNCTIONS
+        function renderCertificates(searchTerm = '') {
+
+            const list = document.getElementById('certificateList');
+
+            const filtered = certificates.filter(c =>
+
+                c.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+
+                c.issuer.toLowerCase().includes(searchTerm.toLowerCase())
+
+            );
+
+
+
+            if (filtered.length === 0) {
+
+                list.innerHTML = `
+
+                    <div class="empty-state">
+
+                        <i class="fas fa-certificate"></i>
+
+                        <h3>Henüz sertifika bulunmuyor</h3>
+
+                        <p>Yeni sertifika eklemek için yukarıdaki butona tıklayın</p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+
+            list.innerHTML = filtered.map(cert => `
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <div class="card-title">${cert.name}</div>
+
+                            <div class="card-meta">
+
+                                <span><i class="fas fa-building"></i> ${cert.issuer}</span>
+
+                                <span><i class="fas fa-calendar"></i> ${formatDate(cert.date)}</span>
+
+                                ${cert.id_number ? `<span><i class="fas fa-id-card"></i> ${cert.id_number}</span>` : ''}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    ${cert.description ? `<div class="card-description">${cert.description}</div>` : ''}
+
+                    <div class="card-actions">
+
+                        <button class="icon-btn" onclick="editCertificate('${cert.id}')">
+
+                            <i class="fas fa-edit"></i> Düzenle
+
+                        </button>
+
+                        <button class="icon-btn delete" onclick="deleteCertificate('${cert.id}')">
+
+                            <i class="fas fa-trash"></i> Sil
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `).join('');
+
+        }
+
+
+
+        function openCertificateModal(id = null) {
+
+            const modal = document.getElementById('certificateModal');
+
+            const form = document.getElementById('certificateForm');
+
+            const title = document.getElementById('certificateModalTitle');
+
+
+
+            form.reset();
+
+
+
+            if (id) {
+
+                const cert = certificates.find(c => c.id === id);
+
+                if (cert) {
+
+                    title.textContent = 'Sertifikayı Düzenle';
+
+                    document.getElementById('certificateId').value = cert.id;
+
+                    document.getElementById('certificateName').value = cert.name;
+
+                    document.getElementById('certificateIssuer').value = cert.issuer;
+
+                    document.getElementById('certificateDate').value = cert.date;
+
+                    document.getElementById('certificateId_number').value = cert.id_number || '';
+
+                    document.getElementById('certificateDescription').value = cert.description || '';
+
+                }
+
+            } else {
+
+                title.textContent = 'Yeni Sertifika Ekle';
+
+                document.getElementById('certificateId').value = '';
+
+            }
+
+
+
+            modal.classList.add('show');
+
+        }
+
+
+
+        function closeCertificateModal() {
+
+            document.getElementById('certificateModal').classList.remove('show');
+
+        }
+
+
+
+        function editCertificate(id) {
+
+            openCertificateModal(id);
+
+        }
+
+
+
+        function deleteCertificate(id) {
+            showConfirmDialog('Bu sertifikayı silmek istediğinize emin misiniz?', async () => {
+                try {
+                    await fetch(`${API_URL}/certificates/${id}`, { method: 'DELETE' });
+                    certificates = certificates.filter(c => c.id !== id);
+                    renderCertificates();
+                    updateStats();
+                } catch { alert('Sertifika silinirken hata oluştu.'); }
+            });
+        }
+
+
+
+        document.getElementById('certificateForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('certificateId').value;
+            const fileUrl = document.getElementById('certFileUrl').value;
+            const payload = {
+                name: document.getElementById('certificateName').value,
+                organization: document.getElementById('certificateIssuer').value,
+                date: document.getElementById('certificateDate').value,
+                fileUrl: fileUrl || '#',
+                thumbnail: fileUrl || ''
+            };
+            try {
+                if (id) {
+                    const res = await fetch(`${API_URL}/certificates/${id}`, {
+                        method: 'PUT', headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const data = await res.json();
+                    const idx = certificates.findIndex(c => c.id === id);
+                    if (idx !== -1) certificates[idx] = data;
+                } else {
+                    const res = await fetch(`${API_URL}/certificates`, {
+                        method: 'POST', headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const data = await res.json();
+                    certificates.unshift(data);
+                }
+                closeCertificateModal();
+                renderCertificates();
+                updateStats();
+            } catch (err) {
+                alert('Sertifika kaydedilirken hata oluştu.');
+            }
+        });
+
+
+
+        document.getElementById('searchCertificate').addEventListener('input', (e) => {
+
+            renderCertificates(e.target.value);
+
+        });
+
+
+
+        // BLOG FUNCTIONS
+        async function loadBlogs() {
+            try {
+                const response = await fetch(`${API_URL}/posts`);
+                if (!response.ok) throw new Error('Blog yazıları yüklenemedi');
+                blogs = await response.json();
+                renderBlogs();
+                updateStats();
+            } catch (error) {
+                console.error('Blog yükleme hatası:', error);
+            }
+        }
+
+        function renderBlogs(searchTerm = '') {
+
+            const list = document.getElementById('blogList');
+
+            const filtered = blogs.filter(b =>
+                b.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                (b.content && b.content.toLowerCase().includes(searchTerm.toLowerCase()))
+            );
+
+
+
+            if (filtered.length === 0) {
+
+                list.innerHTML = `
+
+                    <div class="empty-state">
+
+                        <i class="fas fa-blog"></i>
+
+                        <h3>Henüz blog yazısı bulunmuyor</h3>
+
+                        <p>Yeni blog yazısı eklemek için yukarıdaki butona tıklayın</p>
+
+                    </div>
+
+                `;
+
+                return;
+
+            }
+
+
+
+            list.innerHTML = filtered.map(blog => `
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <div class="card-title">${blog.title}</div>
+
+                            <div class="card-meta">
+                        <span><i class="fas fa-calendar"></i> ${formatDate(blog.date)}</span>
+                    </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="card-description">${truncateText(blog.content, 150)}</div>
+
+                    <div class="card-actions">
+
+                        <button class="icon-btn" onclick="editBlog('${blog.id}')">
+
+                            <i class="fas fa-edit"></i> Düzenle
+
+                        </button>
+
+                        <button class="icon-btn delete" onclick="deleteBlog('${blog.id}')">
+
+                            <i class="fas fa-trash"></i> Sil
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `).join('');
+
+        }
+
+
+
+        function openBlogModal(id = null) {
+
+            const modal = document.getElementById('blogModal');
+
+            const form = document.getElementById('blogForm');
+
+            const title = document.getElementById('blogModalTitle');
+
+
+
+            form.reset();
+
+
+
+            if (id) {
+
+                const blog = blogs.find(b => b.id === id);
+
+                if (blog) {
+
+                    title.textContent = 'Blog Yazısını Düzenle';
+
+                    document.getElementById('blogId').value = blog.id;
+                    document.getElementById('blogTitle').value = blog.title;
+                    document.getElementById('blogDate').value = blog.date;
+                    document.getElementById('blogContent').value = blog.content;
+
+                }
+
+            } else {
+
+                title.textContent = 'Yeni Blog Yazısı Ekle';
+
+                document.getElementById('blogId').value = '';
+
+            }
+
+
+
+            modal.classList.add('show');
+
+        }
+
+
+
+        function closeBlogModal() {
+
+            document.getElementById('blogModal').classList.remove('show');
+
+        }
+
+
+
+        function editBlog(id) {
+
+            openBlogModal(id);
+
+        }
+
+
+
+        function deleteBlog(id) {
+            showConfirmDialog('Bu blog yazısını silmek istediğinize emin misiniz?', async () => {
+                try {
+                    const response = await fetch(`${API_URL}/posts/${id}`, { method: 'DELETE' });
+                    if (!response.ok) throw new Error('Silme hatası');
+                    blogs = blogs.filter(b => b.id !== id);
+                    renderBlogs();
+                    updateStats();
+                } catch (error) {
+                    console.error('Blog silme hatası:', error);
+                    alert('Blog yazısı silinirken bir hata oluştu.');
+                }
+            });
+        }
+
+
+
+        document.getElementById('blogForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const id = document.getElementById('blogId').value;
+            const payload = {
+                title: document.getElementById('blogTitle').value,
+                summary: document.getElementById('blogContent').value.substring(0, 150) + '...',
+                date: document.getElementById('blogDate').value,
+                content: document.getElementById('blogContent').value
+            };
+
+            try {
+                if (id) {
+                    const response = await fetch(`${API_URL}/posts/${id}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) throw new Error('Güncelleme hatası');
+                    const data = await response.json();
+                    const index = blogs.findIndex(b => b.id === id);
+                    if (index !== -1) blogs[index] = data;
+                } else {
+                    const response = await fetch(`${API_URL}/posts`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) throw new Error('Ekleme hatası');
+                    const data = await response.json();
+                    blogs.unshift(data);
+                }
+
+                closeBlogModal();
+                renderBlogs();
+                updateStats();
+            } catch (error) {
+                console.error('Blog kaydetme hatası:', error);
+                alert('Blog yazısı kaydedilirken bir hata oluştu.');
+            }
+        });
+
+
+
+        document.getElementById('searchBlog').addEventListener('input', (e) => {
+
+            renderBlogs(e.target.value);
+
+        });
+
+
+
+        // UTILITY FUNCTIONS
+
+        function formatDate(dateString) {
+
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+            return new Date(dateString).toLocaleDateString('tr-TR', options);
+
+        }
+
+
+
+        function truncateText(text, maxLength) {
+
+            if (text.length <= maxLength) return text;
+
+            return text.substr(0, maxLength) + '...';
+
+        }
+
+
+
+        // Confirm Dialog
+
+        function showConfirmDialog(message, onConfirm) {
+
+            const dialog = document.getElementById('confirmDialog');
+
+            const messageEl = document.getElementById('confirmMessage');
+
+            const confirmBtn = document.getElementById('confirmBtn');
+
+
+
+            messageEl.textContent = message;
+
+            dialog.classList.add('show');
+
+
+
+            confirmBtn.onclick = () => {
+
+                onConfirm();
+
+                closeConfirmDialog();
+
+            };
+
+        }
+
+
+
+        function closeConfirmDialog() {
+
+            document.getElementById('confirmDialog').classList.remove('show');
+
+        }
+
+
+
+        // Close modals on outside click
+
+        window.addEventListener('click', (e) => {
+
+            if (e.target.classList.contains('modal')) {
+
+                e.target.classList.remove('show');
+
+            }
+
+            if (e.target.classList.contains('confirm-dialog')) {
+
+                closeConfirmDialog();
+
+            }
+
+        });
+
+
+
+        // Initialize
+        (async () => {
+            await loadEducations();
+            await loadCertificates();
+            await loadBlogs();
+            updateStats();
+        })();
+
     </script>
+
 </body>
+
 </html>

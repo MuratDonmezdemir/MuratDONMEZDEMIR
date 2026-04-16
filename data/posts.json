@@ -1,0 +1,16 @@
+[
+  {
+    "id": "post-1",
+    "title": "AI Tabanlı Test Otomasyonu",
+    "summary": "Yapay zeka destekli test otomasyon araçları ve gelecekteki rolü hakkında detaylı bir inceleme.",
+    "date": "2024-01-15",
+    "content": "AI tabanlı test otomasyonu, yazılım test süreçlerini devrim niteliğinde değiştiriyor..."
+  },
+  {
+    "id": "post-2",
+    "title": "Modern Web Geliştirme Teknikleri",
+    "summary": "React, Node.js ve modern JavaScript framework'leri ile web geliştirme best practice'leri.",
+    "date": "2024-01-10",
+    "content": "Modern web geliştirme, kullanıcı deneyimini ön planda tutarak..."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "edu-01",
+    "title": "Bilgisayar Mühendisliği",
+    "institution": "Orta Doğu Teknik Üniversitesi",
+    "date": "2018"
+  },
+  {
+    "id": "edu-02",
+    "title": "Yazılım Test Uzmanlığı Eğitimi",
+    "institution": "BilgeAdam Akademi",
+    "date": "2019"
+  }
+]

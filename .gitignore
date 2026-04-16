@@ -27,3 +27,9 @@ Thumbs.db
 
 # Attached assets
 attached_assets/
+
+# Node
+node_modules/
+
+# Uploads (kullanıcı yüklemeleri)
+uploads/
