@@ -1,622 +1,120 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Murat Dönmezdemir - QA Test Uzmanı & Full-Stack Developer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <style>
-        .hero-gradient {
-            background: url('https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-08-17%20171506.png') center/cover no-repeat;
-        }
-        .certificate-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        .skill-bar {
-            transition: width 1.5s ease-in-out;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Murat Dönmezdemir - QA Test Uzmanı &amp; Full-Stack Developer</title>
+<meta name="description" content="Murat Dönmezdemir - QA Test Uzmanı ve Full-Stack Developer. Modern test otomasyonu, web geliştirme ve yazılım kalite güvencesi uzmanı.">
+<meta name="keywords" content="QA, Test Otomasyonu, Selenium, Full-Stack Developer, Murat Dönmezdemir">
+<meta name="author" content="Murat Dönmezdemir">
+<meta property="og:title" content="Murat Dönmezdemir - QA Test Uzmanı & Full-Stack Developer">
+<meta property="og:description" content="Modern test otomasyonu ve Full-Stack web geliştirme uzmanı.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{sans:['Inter','system-ui','-apple-system','sans-serif'],display:['Plus Jakarta Sans','Inter','sans-serif']},colors:{primary:{50:'#eff6ff',100:'#dbeafe',200:'#bfdbfe',300:'#93c5fd',400:'#60a5fa',500:'#3b82f6',600:'#2563eb',700:'#1d4ed8',800:'#1e40af',900:'#1e3a8a'},dark:{50:'#f8fafc',100:'#f1f5f9',200:'#e2e8f0',300:'#cbd5e1',400:'#94a3b8',500:'#64748b',600:'#475569',700:'#334155',800:'#1e293b',900:'#0f172a',950:'#020617'}}}}}</script>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
-<body class="font-sans antialiased text-gray-800">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-sm fixed w-full z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <span class="text-xl font-bold text-blue-800">Murat Dönmezdemir</span>
-                </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#about" class="text-gray-700 hover:text-blue-600 px-3 py-2">Hakkımda</a>
-                    <a href="#education" class="text-gray-700 hover:text-blue-600 px-3 py-2">Eğitim</a>
-                    <a href="#projects" class="text-gray-700 hover:text-blue-600 px-3 py-2">Projeler</a>
-                    <a href="#blog" class="text-gray-700 hover:text-blue-600 px-3 py-2">Blog</a>
-                    <a href="#certificates" class="text-gray-700 hover:text-blue-600 px-3 py-2">Sertifikalar</a>
-                    <a href="admin.html" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                        <i data-feather="lock" class="inline mr-2"></i>Yönetim Paneli
-                    </a>
-                </div>
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-button" class="text-gray-700 hover:text-blue-600">
-                        <i data-feather="menu"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- Mobile menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white pb-3">
-            <a href="#about" class="block px-4 py-2 text-gray-700 hover:bg-blue-50">Hakkımda</a>
-            <a href="#education" class="block px-4 py-2 text-gray-700 hover:bg-blue-50">Eğitim</a>
-            <a href="#projects" class="block px-4 py-2 text-gray-700 hover:bg-blue-50">Projeler</a>
-            <a href="#blog" class="block px-4 py-2 text-gray-700 hover:bg-blue-50">Blog</a>
-            <a href="#certificates" class="block px-4 py-2 text-gray-700 hover:bg-blue-50">Sertifikalar</a>
-            <a href="admin.html" class="block px-4 py-2 text-blue-600 hover:bg-blue-50">
-                <i data-feather="lock" class="inline mr-2"></i>Yönetim Paneli
-            </a>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="hero-gradient pt-24 pb-20 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="md:flex items-center justify-between">
-                <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
-                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Murat Dönmezdemir</h1>
-                    <h2 class="text-2xl md:text-3xl font-semibold mb-6">QA Test Uzmanı & Full-Stack Developer</h2>
-                    <p class="text-lg mb-8 opacity-90">Teknoloji tutkum ve analitik düşünme yeteneğimle kaliteli yazılım çözümleri sunuyorum.</p>
-                    <div class="flex space-x-4">
-                        <a href="#contact" class="bg-white text-blue-700 px-6 py-3 rounded-md font-medium hover:bg-gray-100 transition duration-300">
-                            İletişim
-                        </a>
-                        <a href="#certificates" class="border border-white text-white px-6 py-3 rounded-md font-medium hover:bg-white hover:text-blue-700 transition duration-300">
-                            Sertifikalarım
-                        </a>
-                    </div>
-                </div>
-                <div class="md:w-1/2 flex justify-center" data-aos="fade-left">
-                    <div class="relative">
-                        <div class="w-64 h-64 md:w-80 md:h-80 bg-blue-200 rounded-full overflow-hidden shadow-xl">
-                            <img src="https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/menderesAbi.jpeg" alt="Murat Dönmezdemir" class="w-full h-full object-cover">
-                        </div>
-                        <div class="absolute -bottom-5 -right-5 bg-white p-4 rounded-lg shadow-lg">
-                            <div class="text-blue-800 font-bold text-xl">5+</div>
-                            <div class="text-gray-600 text-sm">Yıllık Deneyim</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Hakkımda</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
-            </div>
-            <div class="md:flex items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
-                    <img src="https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-08-17%20171506.png" alt="Çalışma Alanı" class="rounded-lg shadow-lg w-full">
-                </div>
-                <div class="md:w-1/2 md:pl-12" data-aos="fade-left">
-                    <p class="text-lg text-gray-700 mb-6">Yazılım test otomasyonu ve full stack geliştirme alanlarında uzmanlaşmış bir mühendis ve eğitmenim. Kariyerim boyunca masaüstü ve web tabanlı sistemlerde kalite güvencesi, test senaryosu tasarımı, veri analizi ve yazılım geliştirme konularında aktif rol aldım.</p>
-
-                    <p class="text-lg text-gray-700 mb-6">Test otomasyonu tarafında Selenium, Appium, TestNG, JUnit, Postman, REST Assured, Katalon Studio, Cucumber ve PyTest gibi araçlarla sağlam framework’ler kurarak hem API hem mobil hem de UI testlerini kapsayan sistemler geliştirdim. CI/CD süreçlerine Jenkins, GitHub Actions ve GitLab ile entegre test altyapıları kurarak yazılım teslimatlarını hızlandırdım, hata oranlarını düşürdüm.</p>
-
-                    <p class="text-lg text-gray-700 mb-6">Full Stack Developer olarak Java, C#, Python, JavaScript, TypeScript, HTML, CSS, SQL gibi dillerle çalışıyor; React, Node.js, Express, Flask, Django gibi modern teknolojilerle uçtan uca çözümler üretiyorum. Veritabanı tarafında MySQL, PostgreSQL, SQLite ve MongoDB ile çalıştım. Versiyon kontrolü için Git, GitHub, GitLab ve SVN kullanıyor; dağıtım ve konteyner yönetimi için Docker ve Kubernetes ile sistemleri ölçekliyorum.</p>
-
-                    <p class="text-lg text-gray-700 mb-6">IDE olarak Visual Studio Code, VSCodium, IntelliJ IDEA, PyCharm, Eclipse ve Rider gibi gelişmiş editörlerle çalışıyorum. Kod kalitesini artırmak için ESLint, SonarQube, Prettier ve StyleCop gibi araçlarla statik analiz ve kod düzeni sağlıyorum.</p>
-
-                    <p class="text-lg text-gray-700 mb-6">Yapay zeka destekli test teknolojilerine özel ilgi duyuyorum. Testim.io, Applitools, Mabl, Launchable, Functionize ve TestGPT gibi AI tabanlı araçlarla test senaryosu üretimi, görsel regresyon analizi ve tahmine dayalı test önceliklendirme gibi yenilikçi çözümler geliştiriyorum. Bu araçlar sayesinde test süreçleri daha akıllı, daha hızlı ve daha dayanıklı hale geliyor.</p>
-
-                    <p class="text-lg text-gray-700 mb-6">Agile metodolojilere hâkimim. Jira, Confluence, Azure DevOps ve Trello gibi araçlarla proje takibini ve ekip içi iletişimi etkin şekilde yürütüyorum. Açık kaynak projelere katkı sunmayı, bilgimi paylaşmayı ve sürekli öğrenmeyi seviyorum.</p>
-
-                    <p class="text-lg text-gray-700 mb-6">Uzaktan çalışmaya ve uluslararası projelere açığım. Hem teknik hem eğitsel rollerde yer alarak ekipleri ileri taşımayı, yazılım kalitesini yükseltmeyi ve birlikte üretmeyi hedefliyorum.</p>
-
-                    <div class="mt-8">
-                        <h3 class="text-xl font-semibold mb-4 text-gray-800">Yeteneklerim</h3>
-                        <div class="space-y-4">
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-gray-700">QA Testing</span>
-                                    <span class="text-gray-700" data-width="90%">90%</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                    <div class="skill-bar bg-blue-600 h-2.5 rounded-full" style="width: 90%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-gray-700">Full-Stack Development</span>
-                                    <span class="text-gray-700" data-width="85%">85%</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                    <div class="skill-bar bg-blue-600 h-2.5 rounded-full" style="width: 85%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-gray-700">Data Analysis</span>
-                                    <span class="text-gray-700" data-width="80%">80%</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                    <div class="skill-bar bg-blue-600 h-2.5 rounded-full" style="width: 80%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Education Section -->
-    <section id="education" class="py-20" style="background: url('https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-08-17%20171506.png') center/cover no-repeat;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Eğitim</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
-            </div>
-            <div id="education-container" class="grid md:grid-cols-3 gap-8">
-                <!-- Eğitim bilgileri buraya dinamik olarak yüklenecek -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Projeler</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
-            </div>
-            <div id="projects-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Projeler buraya dinamik olarak yüklenecek -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section id="blog" class="py-20" style="background: url('https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-08-17%20171506.png') center/cover no-repeat;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Blog</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
-            </div>
-            <div id="blog-posts-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Blog gönderileri buraya dinamik olarak yüklenecek -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Certificates Section -->
-    <section id="certificates" class="py-20" style="background: url('https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-08-17%20171506.png') center/cover no-repeat;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Sertifikalar</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
-            </div>
-            <div id="certificates-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Certificate items -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20" style="background: url('https://huggingface.co/spaces/MndrsDnmzdmr/my-personel-web-site/resolve/main/images/Ekran%20g%C3%B6r%C3%BCnt%C3%BCs%C3%BC%202024-08-17%20171506.png') center/cover no-repeat;">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">İletişim</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
-            </div>
-            <div class="md:flex">
-                <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
-                    <div class="bg-gray-50 p-8 rounded-lg shadow-md h-full">
-                        <h3 class="text-xl font-semibold mb-6">Bana Ulaşın</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-start">
-                                <div class="text-blue-600 mr-4 mt-1">
-                                    <i data-feather="mail" class="w-5 h-5"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-gray-800">Email</h4>
-                                    <p class="text-gray-600">testingdnmzdmr@gmail.com</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="text-blue-600 mr-4 mt-1">
-                                    <i data-feather="phone" class="w-5 h-5"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-gray-800">Telefon</h4>
-                                    <p class="text-gray-600">+90 554 908 3133</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="text-blue-600 mr-4 mt-1">
-                                    <i data-feather="map-pin" class="w-5 h-5"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-medium text-gray-800">Adres</h4>
-                                    <p class="text-gray-600">Van, Türkiye</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-8">
-                            <h4 class="font-medium text-gray-800 mb-4">Sosyal Medya</h4>
-                            <div class="flex space-x-4">
-                                <a href="https://github.com/MuratDonmezdemir" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600" title="GitHub">
-                                    <i data-feather="github" class="w-6 h-6"></i>
-                                </a>
-                                <a href="https://www.linkedin.com/in/murat-dönmezdemir/" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600" title="LinkedIn">
-                                    <i data-feather="linkedin" class="w-6 h-6"></i>
-                                </a>
-                                <a href="https://twitter.com/mndrs1973" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600" title="Twitter">
-                                    <i data-feather="twitter" class="w-6 h-6"></i>
-                                </a>
-                                <a href="https://instagram.com/DEVELOPER_MNDRS" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-pink-600" title="Instagram">
-                                    <i data-feather="instagram" class="w-6 h-6"></i>
-                                </a>
-                                <a href="https://linktr.ee/Murat_Donmezdemir" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-green-600" title="Linktree">
-                                    <i data-feather="link" class="w-6 h-6"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="md:w-1/2 md:pl-12" data-aos="fade-left">
-                    <div class="bg-gray-50 p-8 rounded-lg shadow-md">
-                        <h3 class="text-xl font-semibold mb-6">Mesaj Gönder</h3>
-                        <form id="contact-form">
-                            <div class="mb-4">
-                                <label for="name" class="block text-gray-700 mb-2">Adınız</label>
-                                <input type="text" id="name" name="from_name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                            </div>
-                            <div class="mb-4">
-                                <label for="email" class="block text-gray-700 mb-2">Email</label>
-                                <input type="email" id="email" name="from_email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                            </div>
-                            <div class="mb-4">
-                                <label for="message" class="block text-gray-700 mb-2">Mesajınız</label>
-                                <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
-                            </div>
-                            <button type="submit" id="submit-btn" class="bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700 transition duration-300 w-full">
-                                Gönder
-                            </button>
-                            <div id="form-message" class="mt-4 text-center hidden"></div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="md:flex md:justify-between">
-                <div class="mb-8 md:mb-0">
-                    <h3 class="text-xl font-bold mb-4">Murat Dönmezdemir</h3>
-                    <p class="text-gray-400">QA Test Uzmanı & Full-Stack Developer</p>
-                </div>
-                <div class="grid grid-cols-2 gap-8 md:grid-cols-3">
-                    <div>
-                        <h4 class="text-sm font-semibold uppercase tracking-wider mb-4">Bağlantılar</h4>
-                        <ul class="space-y-2">
-                            <li><a href="#about" class="text-gray-400 hover:text-white">Hakkımda</a></li>
-                            <li><a href="#education" class="text-gray-400 hover:text-white">Eğitim</a></li>
-                            <li><a href="#certificates" class="text-gray-400 hover:text-white">Sertifikalar</a></li>
-                            <li><a href="#contact" class="text-gray-400 hover:text-white">İletişim</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-sm font-semibold uppercase tracking-wider mb-4">Hizmetler</h4>
-                        <ul class="space-y-2">
-                            <li><a href="#" class="text-gray-400 hover:text-white">QA Testing</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-white">Web Geliştirme</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-white">Veri Analizi</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-sm font-semibold uppercase tracking-wider mb-4">Yasal</h4>
-                        <ul class="space-y-2">
-                            <li><a href="#" class="text-gray-400 hover:text-white">Gizlilik Politikası</a></li>
-                            <li><a href="#" class="text-gray-400 hover:text-white">Kullanım Şartları</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-12 pt-8 border-t border-gray-800 text-center">
-                <p class="text-gray-400">&copy; 2023 Murat Dönmezdemir. Tüm hakları saklıdır.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        });
-
-        // Initialize animations
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: true
-        });
-
-        // Initialize feather icons
-        feather.replace();
-
-        // Animate skill bars on scroll
-        window.addEventListener('scroll', function() {
-            const skillBars = document.querySelectorAll('.skill-bar');
-            skillBars.forEach(bar => {
-                const rect = bar.getBoundingClientRect();
-                if (rect.top < window.innerHeight) {
-                    bar.style.width = bar.parentElement.getAttribute('data-width');
-                }
-            });
-        });
-
-        // Trigger skill bar animation on page load if already in view
-        document.addEventListener('DOMContentLoaded', function() {
-            const skillBars = document.querySelectorAll('.skill-bar');
-            skillBars.forEach(bar => {
-                const rect = bar.getBoundingClientRect();
-                if (rect.top < window.innerHeight) {
-                    bar.style.width = bar.parentElement.getAttribute('data-width');
-                }
-            });
-        });
-
-        // Initialize EmailJS
-        // KURULUM TALİMATLARI:
-        // 1. EmailJS.com'a gidin ve ücretsiz hesap oluşturun
-        // 2. Email Service ekleyin (Gmail önerilir)
-        // 3. Email Template oluşturun (from_name, from_email, message parametrelerini kullanın)
-        // 4. Aşağıdaki değerleri kendi bilgilerinizle değiştirin
-
-        (function(){
-            // EmailJS public key - emailjs.com'dan alın
-            emailjs.init("YOUR_PUBLIC_KEY"); // Buraya kendi Public Key'inizi yazın
-        })();
-
-        // Contact form submission
-        document.getElementById('contact-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            const submitBtn = document.getElementById('submit-btn');
-            const formMessage = document.getElementById('form-message');
-            const originalBtnText = submitBtn.innerHTML;
-
-            // Disable button and show loading
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = 'Gönderiliyor...';
-            formMessage.classList.add('hidden');
-
-            // EmailJS service ve template ID'leri
-            const serviceID = 'YOUR_SERVICE_ID';  // EmailJS Service ID
-            const templateID = 'YOUR_TEMPLATE_ID'; // EmailJS Template ID
-
-            emailjs.sendForm(serviceID, templateID, this)
-                .then(function() {
-                    // Save message to localStorage
-                    const contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
-                    const newMessage = {
-                        id: Date.now().toString(),
-                        name: document.getElementById('name').value,
-                        email: document.getElementById('email').value,
-                        message: document.getElementById('message').value,
-                        createdAt: new Date().toISOString(),
-                        read: false
-                    };
-                    contacts.unshift(newMessage);
-                    localStorage.setItem('contacts', JSON.stringify(contacts));
-
-                    // Başarılı
-                    formMessage.className = 'mt-4 text-center text-green-600 font-medium';
-                    formMessage.textContent = '✓ Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağım.';
-                    formMessage.classList.remove('hidden');
-
-                    // Form'u temizle
-                    document.getElementById('contact-form').reset();
-
-                    // Button'u eski haline getir
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = originalBtnText;
-
-                    // Mesajı 5 saniye sonra gizle
-                    setTimeout(function() {
-                        formMessage.classList.add('hidden');
-                    }, 5000);
-                }, function(error) {
-                    // Hata
-                    console.error('EmailJS Error:', error);
-                    formMessage.className = 'mt-4 text-center text-red-600 font-medium';
-                    formMessage.textContent = '✗ Mesaj gönderilemedi. Lütfen daha sonra tekrar deneyin veya doğrudan email gönderin: testingdnmzdmr@gmail.com';
-                    formMessage.classList.remove('hidden');
-
-                    // Button'u eski haline getir
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = originalBtnText;
-
-                    // Hata mesajını 10 saniye sonra gizle
-                    setTimeout(function() {
-                        formMessage.classList.add('hidden');
-                    }, 10000);
-                });
-        });
-
-        // Load blog posts dynamically
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load Blog Posts
-            const postsContainer = document.getElementById('blog-posts-container');
-            const blogPosts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
-
-            // Manually add the static post if no dynamic posts exist, for demonstration
-            const allPosts = [...blogPosts];
-            const staticPostExists = allPosts.some(p => p.title === "Test Otomasyonunda En İyi Pratikler");
-
-            if (!staticPostExists) {
-                allPosts.unshift({ // Add to the beginning
-                    id: 'static-01',
-                    title: "Test Otomasyonunda En İyi Pratikler",
-                    excerpt: "Test otomasyonu projelerinde başarıya ulaşmak için uygulanması gereken temel stratejiler ve ipuçları.",
-                    // Full content from the static page
-                    content: `
-                        <p class="mb-6 text-lg text-gray-700">Test otomasyonu projelerinde başarıya ulaşmak için uygulanması gereken temel stratejileri ve ipuçlarını adım adım ele alıyoruz.</p>
-                        <section class="mb-6"><h2 class="text-xl font-semibold mb-2">🧭 1. Doğru Testleri Otomatize Et</h2><ul class="list-disc list-inside space-y-1 text-gray-700"><li>Sık tekrar eden, regresyon riski taşıyan testler otomasyon için idealdir.</li><li>Karmaşık UI testleri, sık değişen ekranlar nedeniyle manuel testle daha verimli olabilir.</li><li>Kritik iş akışları, otomasyonla güvence altına alınmalı.</li></ul><p class="mt-2 text-yellow-600 font-semibold">🎯 İpucu: Test senaryosunu seçmeden önce ROI analizini mutlaka yap.</p></section>
-                        <section class="mb-6"><h2 class="text-xl font-semibold mb-2">🛠️ 2. Sağlam Bir Framework Kur</h2><ul class="list-disc list-inside space-y-1 text-gray-700"><li>Modüler yapı: Her test bağımsız çalışmalı.</li><li>Page Object Model (POM): Kod tekrarını azaltır.</li><li>Veri odaklı testler: Senaryo çeşitliliği sağlar.</li></ul><p class="mt-2 text-green-600 font-semibold">🧪 Bonus: TestNG, JUnit, Pytest gibi framework’ler ile paralel test çalıştırma kolaylaşır.</p></section>
-                        <section class="mb-6"><h2 class="text-xl font-semibold mb-2">🔍 3. Hataları Erken Yakala</h2><ul class="list-disc list-inside space-y-1 text-gray-700"><li>CI/CD araçları ile her commit sonrası testleri tetikle.</li><li>Pipeline’a test adımı eklemek, hataları erken yakalamanı sağlar.</li><li>Fail fast prensibi: Hata varsa hemen dur.</li></ul><p class="mt-2 text-blue-600 font-semibold">🧩 İpucu: Test sonuçlarını Slack, Teams gibi araçlara entegre et.</p></section>
-                        <footer class="mt-10 text-center text-sm text-gray-600">🎁 Test otomasyonu bir varış noktası değil, sürekli gelişen, yaşayan bir yolculuktur.</footer>
-                    `,
-                    tags: ["QA Testing"],
-                    createdAt: new Date('2025-01-15').toISOString(),
-                });
-                // **DÜZELTME: Statik yazıyı localStorage'a da kaydet**
-                const updatedPostsForStorage = JSON.parse(localStorage.getItem('blogPosts') || '[]');
-                updatedPostsForStorage.unshift(allPosts[0]); // Yeni eklenen statik yazıyı al
-                localStorage.setItem('blogPosts', JSON.stringify(updatedPostsForStorage));
-            }
-
-            if (allPosts.length === 0) {
-                postsContainer.innerHTML = '<p class="text-center text-gray-600 col-span-full">Henüz yayınlanmış bir blog yazısı bulunmuyor.</p>';
-                return;
-            }
-            postsContainer.innerHTML = ''; // Clear static content
-
-            allPosts.forEach((post, index) => {
-                const postElement = document.createElement('div');
-                postElement.className = 'bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300';
-                postElement.setAttribute('data-aos', 'fade-up');
-                postElement.setAttribute('data-aos-delay', index * 100);
-
-                const tagColors = { "QA Testing": "green", "Data Analysis": "purple", "AI & ML": "red" };
-                const tagColor = tagColors[post.tags[0]] || 'blue';
-
-                postElement.innerHTML = `
-                    <div class="text-gray-500 text-sm mb-2">${new Date(post.createdAt).toLocaleDateString('tr-TR')}</div>
-                    <h3 class="text-xl font-semibold mb-3">${post.title}</h3>
-                    <p class="text-gray-600 mb-4">${post.excerpt}</p>
-                    <div class="flex items-center mb-4">
-                        ${post.tags.map(tag => `<span class="bg-${tagColor}-100 text-${tagColor}-800 text-xs px-2 py-1 rounded">${tag}</span>`).join('')}
-                    </div>
-                    <a href="blog-post.html?id=${post.id}" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center">
-                        Devamını Oku <i data-feather="arrow-right" class="w-4 h-4 ml-2"></i>
-                    </a>
-                `;
-                postsContainer.appendChild(postElement);
-            });
-
-            // Load Projects
-            const projectsContainer = document.getElementById('projects-container');
-            const projects = JSON.parse(localStorage.getItem('projects') || '[]');
-
-            if (projects.length === 0) {
-                projectsContainer.innerHTML = '<p class="text-center text-gray-600 col-span-full">Henüz eklenmiş bir proje bulunmuyor.</p>';
-            } else {
-                projectsContainer.innerHTML = '';
-                projects.forEach((project, index) => {
-                    const projectElement = document.createElement('div');
-                    projectElement.className = 'bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition duration-300';
-                    projectElement.setAttribute('data-aos', 'fade-up');
-                    projectElement.setAttribute('data-aos-delay', index * 100);
-
-                    projectElement.innerHTML = `
-                        <div class="text-blue-600 mb-4">
-                            <i data-feather="code" class="w-10 h-10"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-3">${project.title}</h3>
-                        <p class="text-gray-600 mb-4">${project.description}</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            ${project.tags.map(tag => `<span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">${tag}</span>`).join('')}
-                        </div>
-                        <a href="${project.link || '#'}" target="_blank" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center">
-                            <i data-feather="external-link" class="w-4 h-4 mr-2"></i> Detaylar
-                        </a>
-                    `;
-                    projectsContainer.appendChild(projectElement);
-                });
-            }
-
-            // Load Certificates
-            const certsContainer = document.getElementById('certificates-container');
-            const certificates = JSON.parse(localStorage.getItem('certificates') || '[]');
-
-            if (certificates.length === 0) {
-                certsContainer.innerHTML = '<p class="text-center text-gray-600 col-span-full">Henüz eklenmiş bir sertifika bulunmuyor.</p>';
-            } else {
-                certsContainer.innerHTML = ''; // Clear container
-                certificates.forEach((cert, index) => {
-                    const certElement = document.createElement('div');
-                    certElement.className = 'bg-white p-6 rounded-lg shadow-md certificate-card transition duration-300';
-                    certElement.setAttribute('data-aos', 'fade-up');
-                    certElement.setAttribute('data-aos-delay', index * 100);
-
-                    certElement.innerHTML = `
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h3 class="text-xl font-semibold mb-1">${cert.name}</h3>
-                                <p class="text-gray-600">${cert.organization}</p>
-                            </div>
-                            <div class="text-blue-600">
-                                <i data-feather="file-text" class="w-6 h-6"></i>
-                            </div>
-                        </div>
-                        <p class="text-gray-500 mb-4">Tarih: ${new Date(cert.date).toLocaleDateString('tr-TR')}</p>
-                        <a href="${cert.fileUrl}" target="_blank" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center">
-                            <i data-feather="download" class="w-4 h-4 mr-2"></i> Görüntüle
-                        </a>
-                    `;
-                    certsContainer.appendChild(certElement);
-                });
-            }
-
-            // Load Educations
-            const educationContainer = document.getElementById('education-container');
-            const educations = JSON.parse(localStorage.getItem('educations') || '[]');
-
-            if (educations.length === 0) {
-                educationContainer.innerHTML = '<p class="text-center text-gray-600 col-span-full">Henüz eklenmiş bir eğitim bilgisi bulunmuyor.</p>';
-            } else {
-                educationContainer.innerHTML = '';
-                educations.forEach((edu, index) => {
-                    const eduElement = document.createElement('div');
-                    eduElement.className = 'bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300';
-                    eduElement.setAttribute('data-aos', 'fade-up');
-                    eduElement.setAttribute('data-aos-delay', (index + 1) * 100);
-
-                    // Ikonları başlığa göre belirleyelim
-                    const icons = {
-                        'test': 'award',
-                        'data': 'bar-chart-2',
-                        'developer': 'code'
-                    };
-                    const iconName = Object.keys(icons).find(key => edu.title.toLowerCase().includes(key)) || 'book-open';
-
-                    eduElement.innerHTML = `
-                        <div class="text-blue-600 mb-4">
-                            <i data-feather="${iconName}" class="w-10 h-10"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2">${edu.title}</h3>
-                        <p class="text-gray-600 mb-2">${edu.institution}</p>
-                        <p class="text-gray-500">Mezuniyet Yılı: ${edu.date}</p>
-                    `;
-                    educationContainer.appendChild(eduElement);
-                });
-            }
-
-            // Re-initialize icons for all dynamic content
-            feather.replace();
-        });
-    </script>
+<body class="font-sans antialiased bg-white dark:bg-dark-950 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+<div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none"><div class="absolute top-0 left-1/4 w-96 h-96 bg-primary-400/10 dark:bg-primary-500/5 rounded-full blur-3xl animate-pulse"></div><div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-400/10 dark:bg-purple-500/5 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div></div>
+<nav class="bg-white/90 dark:bg-dark-900/90 backdrop-blur-md shadow-sm fixed w-full z-50 border-b border-gray-100 dark:border-dark-800 transition-colors duration-300">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="flex justify-between h-16 items-center">
+<a href="#" class="flex items-center space-x-2"><div class="w-9 h-9 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center text-white font-bold text-sm">MD</div><span class="font-display font-bold text-xl text-gray-900 dark:text-white hidden sm:block">Murat Dönmezdemir</span></a>
+<div class="hidden md:flex items-center space-x-1">
+<a href="#hakkimda" class="px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors rounded-lg hover:bg-gray-50 dark:hover:bg-dark-800">Hakkımda</a>
+<a href="#yetenekler" class="px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors rounded-lg hover:bg-gray-50 dark:hover:bg-dark-800">Yetenekler</a>
+<a href="#qa-yaklasimi" class="px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors rounded-lg hover:bg-gray-50 dark:hover:bg-dark-800">QA Yaklaşımı</a>
+<a href="#projeler" class="px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors rounded-lg hover:bg-gray-50 dark:hover:bg-dark-800">Projeler</a>
+<a href="#sertifikalar" class="px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors rounded-lg hover:bg-gray-50 dark:hover:bg-dark-800">Sertifikalar</a>
+<a href="#blog" class="px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors rounded-lg hover:bg-gray-50 dark:hover:bg-dark-800">Blog</a>
+<a href="#iletisim" class="px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors rounded-lg hover:bg-gray-50 dark:hover:bg-dark-800">İletişim</a>
+</div>
+<div class="flex items-center space-x-2">
+<button id="dark-mode-toggle" class="p-2 rounded-lg bg-gray-100 dark:bg-dark-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-dark-700 transition-colors"><i data-feather="sun" class="w-4 h-4 hidden dark:block"></i><i data-feather="moon" class="w-4 h-4 block dark:hidden"></i></button>
+<button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-dark-800 text-gray-600 dark:text-gray-300"><i data-feather="menu" class="w-5 h-5"></i></button>
+</div></div></div>
+<div id="mobile-menu" class="hidden md:hidden border-t border-gray-100 dark:border-dark-800 bg-white dark:bg-dark-900 px-4 py-3 space-y-1">
+<a href="#hakkimda" class="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-800">Hakkımda</a>
+<a href="#yetenekler" class="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-800">Yetenekler</a>
+<a href="#qa-yaklasimi" class="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-800">QA Yaklaşımı</a>
+<a href="#projeler" class="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-800">Projeler</a>
+<a href="#sertifikalar" class="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-800">Sertifikalar</a>
+<a href="#blog" class="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-800">Blog</a>
+<a href="#iletisim" class="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-800">İletişim</a>
+<button id="dark-mode-toggle-mobile" class="w-full text-left px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-dark-800"><i data-feather="sun" class="w-4 h-4 inline mr-2 hidden dark:inline"></i><i data-feather="moon" class="w-4 h-4 inline mr-2 dark:hidden"></i>Tema Değiştir</button>
+</div></nav>
+<section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+<div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
+<div class="inline-flex items-center px-4 py-1.5 rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium mb-8"><i data-feather="shield" class="w-4 h-4 mr-2"></i>Kalite Güvence Uzmanı & Full-Stack Developer</div>
+<h1 class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-gray-900 dark:text-white mb-6 leading-tight">Murat<span class="bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent"> Dönmezdemir</span></h1>
+<p class="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">Yazılım kalitesini modern test otomasyonu ve full-stack çözümlerle güvence altına alıyorum. Projelerinize değer katmak için buradayım.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<a href="#iletisim" class="inline-flex items-center justify-center px-8 py-3.5 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-semibold transition-all shadow-lg hover:shadow-xl"><i data-feather="send" class="w-4 h-4 mr-2"></i>İletişime Geç</a>
+<a href="#projeler" class="inline-flex items-center justify-center px-8 py-3.5 bg-gray-100 dark:bg-dark-800 hover:bg-gray-200 dark:hover:bg-dark-700 text-gray-700 dark:text-gray-300 rounded-xl font-semibold transition-all"><i data-feather="folder" class="w-4 h-4 mr-2"></i>Projelerim</a>
+</div>
+<div class="flex justify-center mt-8 space-x-4">
+<a href="https://github.com/MuratDonmezdemir" target="_blank" class="p-3 bg-gray-100 dark:bg-dark-800 rounded-xl text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"><i data-feather="github" class="w-5 h-5"></i></a>
+<a href="https://linkedin.com/in/murat-dönmezdemir" target="_blank" class="p-3 bg-gray-100 dark:bg-dark-800 rounded-xl text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"><i data-feather="linkedin" class="w-5 h-5"></i></a>
+<a href="mailto:testingdnmzdmr@gmail.com" class="p-3 bg-gray-100 dark:bg-dark-800 rounded-xl text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"><i data-feather="mail" class="w-5 h-5"></i></a>
+</div></div></section>
+<section id="hakkimda" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-dark-900/50">
+<div class="max-w-7xl mx-auto"><div class="text-center mb-16" data-aos="fade-up"><h2 class="text-3xl font-display font-bold text-gray-900 dark:text-white mb-4">Hakkımda</h2><div class="w-20 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded-full"></div></div>
+<div class="grid md:grid-cols-3 gap-8" data-aos="fade-up" data-aos-delay="100">
+<div class="bg-white dark:bg-dark-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-dark-700 hover:shadow-lg transition-shadow"><div class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-xl flex items-center justify-center mb-5"><i data-feather="search" class="w-6 h-6"></i></div><h3 class="text-lg font-display font-bold text-gray-900 dark:text-white mb-3">QA & Test</h3><p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Manuel ve otomasyon testleri ile yazılım kalitesini garanti altına alıyorum. Selenium, Appium, Postman gibi araçlarla çalışıyorum.</p></div>
+<div class="bg-white dark:bg-dark-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-dark-700 hover:shadow-lg transition-shadow"><div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-xl flex items-center justify-center mb-5"><i data-feather="code" class="w-6 h-6"></i></div><h3 class="text-lg font-display font-bold text-gray-900 dark:text-white mb-3">Full-Stack Development</h3><p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">React, Node.js, Java ve Python ile modern web ve mobil uygulamalar geliştiriyorum.</p></div>
+<div class="bg-white dark:bg-dark-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-dark-700 hover:shadow-lg transition-shadow"><div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-xl flex items-center justify-center mb-5"><i data-feather="git-branch" class="w-6 h-6"></i></div><h3 class="text-lg font-display font-bold text-gray-900 dark:text-white mb-3">CI/CD & DevOps</h3><p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Jenkins, GitHub Actions ve Docker ile sürekli entegrasyon ve dağıtım süreçleri kuruyorum.</p></div>
+</div></div></section>
+<section id="yetenekler" class="py-20 px-4 sm:px-6 lg:px-8">
+<div class="max-w-7xl mx-auto"><div class="text-center mb-16" data-aos="fade-up"><h2 class="text-3xl font-display font-bold text-gray-900 dark:text-white mb-4">Teknoloji Yığını</h2><div class="w-20 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded-full"></div></div>
+<div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4" data-aos="fade-up" data-aos-delay="100">
+<div class="group bg-white dark:bg-dark-800 p-4 rounded-xl border border-gray-100 dark:border-dark-700 text-center hover:shadow-md hover:-translate-y-1 transition-all"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/selenium/selenium-original.svg" alt="Selenium" class="w-8 h-8 mx-auto mb-2" loading="lazy"><span class="text-xs font-medium text-gray-600 dark:text-gray-400">Selenium</span></div>
+<div class="group bg-white dark:bg-dark-800 p-4 rounded-xl border border-gray-100 dark:border-dark-700 text-center hover:shadow-md hover:-translate-y-1 transition-all"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" class="w-8 h-8 mx-auto mb-2" loading="lazy"><span class="text-xs font-medium text-gray-600 dark:text-gray-400">Java</span></div>
+<div class="group bg-white dark:bg-dark-800 p-4 rounded-xl border border-gray-100 dark:border-dark-700 text-center hover:shadow-md hover:-translate-y-1 transition-all"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="w-8 h-8 mx-auto mb-2" loading="lazy"><span class="text-xs font-medium text-gray-600 dark:text-gray-400">Python</span></div>
+<div class="group bg-white dark:bg-dark-800 p-4 rounded-xl border border-gray-100 dark:border-dark-700 text-center hover:shadow-md hover:-translate-y-1 transition-all"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" class="w-8 h-8 mx-auto mb-2" loading="lazy"><span class="text-xs font-medium text-gray-600 dark:text-gray-400">React</span></div>
+<div class="group bg-white dark:bg-dark-800 p-4 rounded-xl border border-gray-100 dark:border-dark-700 text-center hover:shadow-md hover:-translate-y-1 transition-all"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" class="w-8 h-8 mx-auto mb-2" loading="lazy"><span class="text-xs font-medium text-gray-600 dark:text-gray-400">Node.js</span></div>
+<div class="group bg-white dark:bg-dark-800 p-4 rounded-xl border border-gray-100 dark:border-dark-700 text-center hover:shadow-md hover:-translate-y-1 transition-all"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="w-8 h-8 mx-auto mb-2" loading="lazy"><span class="text-xs font-medium text-gray-600 dark:text-gray-400">JavaScript</span></div>
+<div class="group bg-white dark:bg-dark-800 p-4 rounded-xl border border-gray-100 dark:border-dark-700 text-center hover:shadow-md hover:-translate-y-1 transition-all"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" class="w-8 h-8 mx-auto mb-2" loading="lazy"><span class="text-xs font-medium text-gray-600 dark:text-gray-400">Docker</span></div>
+<div class="group bg-white dark:bg-dark-800 p-4 rounded-xl border border-gray-100 dark:border-dark-700 text-center hover:shadow-md hover:-translate-y-1 transition-all"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" class="w-8 h-8 mx-auto mb-2" loading="lazy"><span class="text-xs font-medium text-gray-600 dark:text-gray-400">Git</span></div>
+</div></div></section>
+<section id="qa-yaklasimi" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-dark-900/50">
+<div class="max-w-7xl mx-auto"><div class="text-center mb-16" data-aos="fade-up"><h2 class="text-3xl font-display font-bold text-gray-900 dark:text-white mb-4">QA Yaklaşımım</h2><div class="w-20 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded-full"></div></div>
+<div class="grid md:grid-cols-3 gap-8" data-aos="fade-up" data-aos-delay="100">
+<div class="bg-white dark:bg-dark-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-dark-700"><div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center mb-5"><i data-feather="layers" class="w-6 h-6"></i></div><h3 class="text-lg font-display font-bold text-gray-900 dark:text-white mb-3">Test Piramidi</h3><p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Unit testlerden UI testlerine kadar katmanlı bir test stratejisi uyguluyorum. %70 Unit, %20 Entegrasyon, %10 E2E oranıyla optimal kapsam sağlıyorum.</p></div>
+<div class="bg-white dark:bg-dark-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-dark-700"><div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-xl flex items-center justify-center mb-5"><i data-feather="repeat" class="w-6 h-6"></i></div><h3 class="text-lg font-display font-bold text-gray-900 dark:text-white mb-3">TDD / BDD</h3><p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Test Driven Development ve Behavior Driven Development yaklaşımlarını kullanarak yazılımı hatasız ve gereksinimlere uygun geliştiriyorum.</p></div>
+<div class="bg-white dark:bg-dark-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-dark-700"><div class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-xl flex items-center justify-center mb-5"><i data-feather="zap" class="w-6 h-6"></i></div><h3 class="text-lg font-display font-bold text-gray-900 dark:text-white mb-3">CI/CD Pipeline</h3><p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Her commit'te otomatik test süreçlerini tetikleyerek hızlı ve güvenli dağıtım sağlıyorum. Jenkins, GitHub Actions ve Docker kullanıyorum.</p></div>
+</div></div></section>
+<section id="projeler" class="py-20 px-4 sm:px-6 lg:px-8"><div class="max-w-7xl mx-auto"><div class="text-center mb-16" data-aos="fade-up"><h2 class="text-3xl font-display font-bold text-gray-900 dark:text-white mb-4">Projelerim</h2><div class="w-20 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded-full"></div></div><div id="projects-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" data-aos="fade-up" data-aos-delay="100"></div></div></section>
+<section id="sertifikalar" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-dark-900/50"><div class="max-w-7xl mx-auto"><div class="text-center mb-16" data-aos="fade-up"><h2 class="text-3xl font-display font-bold text-gray-900 dark:text-white mb-4">Sertifikalar</h2><div class="w-20 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded-full"></div></div><div id="certificates-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="fade-up" data-aos-delay="100"></div></div></section>
+<section id="blog" class="py-20 px-4 sm:px-6 lg:px-8"><div class="max-w-7xl mx-auto"><div class="text-center mb-16" data-aos="fade-up"><h2 class="text-3xl font-display font-bold text-gray-900 dark:text-white mb-4">Blog</h2><div class="w-20 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded-full"></div></div><div id="blog-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" data-aos="fade-up" data-aos-delay="100"></div></div></section>
+<section id="egitim" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-dark-900/50"><div class="max-w-7xl mx-auto"><div class="text-center mb-16" data-aos="fade-up"><h2 class="text-3xl font-display font-bold text-gray-900 dark:text-white mb-4">Eğitim</h2><div class="w-20 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded-full"></div></div><div id="education-container" class="max-w-2xl mx-auto space-y-6" data-aos="fade-up" data-aos-delay="100"></div></div></section>
+<section id="iletisim" class="py-20 px-4 sm:px-6 lg:px-8"><div class="max-w-3xl mx-auto"><div class="text-center mb-16" data-aos="fade-up"><h2 class="text-3xl font-display font-bold text-gray-900 dark:text-white mb-4">İletişim</h2><div class="w-20 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded-full"></div><p class="text-gray-600 dark:text-gray-400 mt-4">Yeni projeler ve iş birlikleri için benimle iletişime geçin.</p></div>
+<form id="contact-form" class="bg-white dark:bg-dark-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-dark-700 space-y-6" data-aos="fade-up" data-aos-delay="100">
+<div class="grid md:grid-cols-2 gap-6"><div><label for="name" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Ad Soyad</label><input type="text" id="name" class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-dark-600 bg-white dark:bg-dark-900 text-gray-900 dark:text-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all text-sm" required></div><div><label for="email" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">E-posta</label><input type="email" id="email" class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-dark-600 bg-white dark:bg-dark-900 text-gray-900 dark:text-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all text-sm" required></div></div>
+<div><label for="message" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Mesajınız</label><textarea id="message" rows="5" class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-dark-600 bg-white dark:bg-dark-900 text-gray-900 dark:text-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all text-sm" required></textarea></div>
+<button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white py-3.5 px-6 rounded-xl font-semibold transition-all shadow-lg hover:shadow-xl flex items-center justify-center"><i data-feather="send" class="w-4 h-4 mr-2"></i>Mesaj Gönder</button>
+<div id="form-success" class="hidden p-4 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 rounded-xl text-sm font-medium text-center">Mesajınız başarıyla gönderildi! En kısa sürede dönüş yapacağım.</div>
+<div id="form-error" class="hidden p-4 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-400 rounded-xl text-sm font-medium text-center">Mesajınız kaydedildi. Alternatif olarak <a href="mailto:testingdnmzdmr@gmail.com" class="underline font-bold">testingdnmzdmr@gmail.com</a> adresine e-posta gönderebilirsiniz.</div>
+</form></div></section>
+<footer class="bg-gray-50 dark:bg-dark-900 border-t border-gray-100 dark:border-dark-800 py-12 px-4">
+<div class="max-w-7xl mx-auto text-center"><div class="flex justify-center space-x-4 mb-6"><a href="https://github.com/MuratDonmezdemir" target="_blank" class="p-2.5 bg-white dark:bg-dark-800 rounded-lg text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors border border-gray-100 dark:border-dark-700"><i data-feather="github" class="w-4 h-4"></i></a><a href="https://linkedin.com/in/murat-dönmezdemir" target="_blank" class="p-2.5 bg-white dark:bg-dark-800 rounded-lg text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors border border-gray-100 dark:border-dark-700"><i data-feather="linkedin" class="w-4 h-4"></i></a><a href="mailto:testingdnmzdmr@gmail.com" class="p-2.5 bg-white dark:bg-dark-800 rounded-lg text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors border border-gray-100 dark:border-dark-700"><i data-feather="mail" class="w-4 h-4"></i></a></div>
+<p class="text-sm text-gray-500 dark:text-gray-400">&copy; 2025 Murat Dönmezdemir. Tüm hakları saklıdır.</p></div></footer>
+<button id="scroll-top" class="fixed bottom-6 right-6 p-3 bg-primary-600 text-white rounded-xl shadow-lg hover:bg-primary-700 transition-all opacity-0 invisible z-50"><i data-feather="arrow-up" class="w-5 h-5"></i></button>
+<script>
+function initDarkMode(){function s(d){document.documentElement.classList.toggle('dark',d);localStorage.setItem('darkMode',d?'true':'false')}var m=localStorage.getItem('darkMode');if(m==='true')s(true);else if(m===null&&window.matchMedia('(prefers-color-scheme:dark)').matches)s(true);['dark-mode-toggle','dark-mode-toggle-mobile'].forEach(function(id){var b=document.getElementById(id);if(b)b.addEventListener('click',function(){s(!document.documentElement.classList.contains('dark'));feather.replace()})})}
+function initMobileMenu(){var b=document.getElementById('mobile-menu-btn'),m=document.getElementById('mobile-menu');if(b&&m){b.addEventListener('click',function(){m.classList.toggle('hidden');feather.replace()});m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.add('hidden')})})}}
+function initScrollTop(){var b=document.getElementById('scroll-top');window.addEventListener('scroll',function(){if(window.scrollY>500){b.classList.remove('opacity-0','invisible');b.classList.add('opacity-100','visible')}else{b.classList.add('opacity-0','invisible');b.classList.remove('opacity-100','visible')}});b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})})}
+function initContactForm(){var f=document.getElementById('contact-form');if(!f)return;f.addEventListener('submit',function(e){e.preventDefault();var c=JSON.parse(localStorage.getItem('contacts')||'[]');c.push({id:Date.now().toString(),name:document.getElementById('name').value,email:document.getElementById('email').value,message:document.getElementById('message').value,createdAt:new Date().toISOString()});localStorage.setItem('contacts',JSON.stringify(c));f.reset();document.getElementById('form-success').classList.remove('hidden');setTimeout(function(){document.getElementById('form-success').classList.add('hidden')},5000)})}
+function renderProjects(){var c=document.getElementById('projects-container');if(!c)return;var p=JSON.parse(localStorage.getItem('projects')||'[]');if(!p.length){c.innerHTML='<div class="col-span-full text-center py-12"><i data-feather="folder" class="w-12 h-12 mx-auto text-gray-300 dark:text-gray-600 mb-4"></i><p class="text-gray-500 dark:text-gray-400">Henüz proje eklenmemiş.</p><p class="text-sm text-gray-400 dark:text-gray-500 mt-1">Admin panelinden proje ekleyebilirsiniz.</p></div>';feather.replace();return}p.forEach(function(pr){var d=document.createElement('div');d.className='bg-white dark:bg-dark-800 rounded-2xl shadow-sm border border-gray-100 dark:border-dark-700 overflow-hidden hover:shadow-lg transition-shadow';d.innerHTML='<div class="p-6"><h3 class="text-lg font-display font-bold text-gray-900 dark:text-white mb-2">'+pr.title+'</h3><p class="text-gray-600 dark:text-gray-400 text-sm mb-4 leading-relaxed">'+pr.description+'</p>'+(pr.tags&&pr.tags.length?'<div class="flex flex-wrap gap-2 mb-4">'+pr.tags.map(function(t){return'<span class="px-2.5 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-xs font-medium rounded-lg">'+t+'</span>'}).join('')+'</div>':'')+'<div class="flex gap-3">'+(pr.link?'<a href="'+pr.link+'" target="_blank" class="inline-flex items-center text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline"><i data-feather="github" class="w-3.5 h-3.5 mr-1"></i>Kaynak Kod</a>':'')+(pr.demoLink?'<a href="'+pr.demoLink+'" target="_blank" class="inline-flex items-center text-sm font-medium text-green-600 dark:text-green-400 hover:underline"><i data-feather="external-link" class="w-3.5 h-3.5 mr-1"></i>Demo</a>':'')+'</div></div>';c.appendChild(d)})}
+function renderCertificates(){var c=document.getElementById('certificates-container');if(!c)return;var certs=JSON.parse(localStorage.getItem('certificates')||'[]');if(!certs.length){c.innerHTML='<div class="col-span-full text-center py-12"><i data-feather="award" class="w-12 h-12 mx-auto text-gray-300 dark:text-gray-600 mb-4"></i><p class="text-gray-500 dark:text-gray-400">Henüz sertifika eklenmemiş.</p></div>';feather.replace();return}certs.forEach(function(cert){var d=document.createElement('div');d.className='bg-white dark:bg-dark-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-dark-700 hover:shadow-lg transition-shadow';d.innerHTML='<div class="flex items-start space-x-4"><div class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 rounded-lg flex items-center justify-center flex-shrink-0"><i data-feather="award" class="w-5 h-5"></i></div><div><h3 class="font-display font-bold text-gray-900 dark:text-white mb-1">'+cert.name+'</h3><p class="text-sm text-gray-500 dark:text-gray-400">'+cert.organization+'</p><p class="text-xs text-gray-400 dark:text-gray-500 mt-1">'+new Date(cert.date).toLocaleDateString('tr-TR')+'</p>'+(cert.fileUrl?'<a href="'+cert.fileUrl+'" target="_blank" class="inline-flex items-center text-sm text-primary-600 dark:text-primary-400 mt-2 hover:underline"><i data-feather="external-link" class="w-3.5 h-3.5 mr-1"></i>Görüntüle</a>':'')+'</div></div>';c.appendChild(d)})}
+function renderBlogPosts(){var c=document.getElementById('blog-container');if(!c)return;var p=JSON.parse(localStorage.getItem('blogPosts')||'[]');if(!p.length){c.innerHTML='<div class="col-span-full text-center py-12"><i data-feather="file-text" class="w-12 h-12 mx-auto text-gray-300 dark:text-gray-600 mb-4"></i><p class="text-gray-500 dark:text-gray-400">Henüz blog yazısı yok.</p></div>';feather.replace();return}p.forEach(function(post){var d=document.createElement('div');d.className='bg-white dark:bg-dark-800 rounded-2xl shadow-sm border border-gray-100 dark:border-dark-700 overflow-hidden hover:shadow-lg transition-shadow cursor-pointer';d.innerHTML=(post.imageUrl?'<img src="'+post.imageUrl+'" alt="'+post.title+'" class="w-full h-48 object-cover" loading="lazy">':'<div class="w-full h-48 bg-gradient-to-br from-primary-100 to-primary-200 dark:from-primary-900/30 dark:to-primary-800/30 flex items-center justify-center"><i data-feather="file-text" class="w-12 h-12 text-primary-400"></i></div>')+'<div class="p-6"><div class="flex flex-wrap gap-2 mb-3">'+(post.tags||[]).map(function(t){return'<span class="px-2 py-0.5 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-xs font-medium rounded-md">'+t+'</span>'}).join('')+'</div><h3 class="text-lg font-display font-bold text-gray-900 dark:text-white mb-2">'+post.title+'</h3><p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">'+post.excerpt+'</p><p class="text-xs text-gray-400 dark:text-gray-500 mt-3">'+new Date(post.createdAt).toLocaleDateString('tr-TR')+'</p></div>';c.appendChild(d)})}
+function renderEducation(){var c=document.getElementById('education-container');if(!c)return;var e=JSON.parse(localStorage.getItem('educations')||'[]');if(!e.length){c.innerHTML='<div class="text-center py-12"><i data-feather="book-open" class="w-12 h-12 mx-auto text-gray-300 dark:text-gray-600 mb-4"></i><p class="text-gray-500 dark:text-gray-400">Henüz eğitim bilgisi eklenmemiş.</p></div>';feather.replace();return}e.forEach(function(edu){var div=document.createElement('div');div.className='bg-white dark:bg-dark-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-dark-700 flex items-start space-x-4';div.innerHTML='<div class="w-10 h-10 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-lg flex items-center justify-center flex-shrink-0"><i data-feather="book-open" class="w-5 h-5"></i></div><div><h3 class="font-display font-bold text-gray-900 dark:text-white mb-1">'+edu.title+'</h3><p class="text-gray-500 dark:text-gray-400 text-sm mb-1">'+edu.institution+'</p><p class="text-gray-400 dark:text-gray-500 text-sm">Mezuniyet: '+edu.date+'</p>';c.appendChild(div)})}
+document.addEventListener('DOMContentLoaded',function(){initDarkMode();initMobileMenu();initScrollTop();initContactForm();renderProjects();renderCertificates();renderBlogPosts();renderEducation();AOS.init({duration:800,once:true,offset:100});feather.replace()});
+</script>
 </body>
 </html>
